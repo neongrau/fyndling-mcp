@@ -1,0 +1,4 @@
+startCommand:
+  type: http
+  url: https://fyndling.de/mcp
+
