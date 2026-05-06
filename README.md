@@ -2,10 +2,9 @@
 
 A remote MCP server providing two datasets for AI assistants:
 
-- **Medieval events** — 2,000+ markets, concerts, and living-history events across 20 European countries (updated weekly)
-- **Historical recipes** — 1,100+ recipes from six cookbooks spanning the 13th–17th century, with modern German adaptations, ingredient lists, and source transcripts
-
-**Endpoint:** `https://fyndling.de/mcp`  
+- **Medieval events** — query 2,000+ markets, concerts, castle experiences, and living-history events across 20 European countries by **location + radius + date range** (updated weekly)
+- **Permanent POIs** — meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
+- **Historical recipes** — 1,100+ recipes from six cookbooks spanning the 13th–17th century, with modern German adaptations, structured ingredient lists, and original manuscript transcripts**Endpoint:** `https://fyndling.de/mcp`  
 **Transport:** Streamable HTTP (MCP spec 2025-03-26)  
 **Auth:** none  
 **Rate limit:** 60 requests / minute  
