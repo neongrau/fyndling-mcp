@@ -6,6 +6,8 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 - **Permanent POIs** — meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
 - **Historical recipes** — 1,100+ recipes from six cookbooks spanning the 13th–17th century, with modern German adaptations, structured ingredient lists, and original manuscript transcripts
 
+→ **[fyndling.de](https://fyndling.de)** — the web app behind this data
+
 **Endpoint:** `https://fyndling.de/mcp`  
 **Transport:** Streamable HTTP (MCP spec 2025-03-26)  
 **Auth:** none  
