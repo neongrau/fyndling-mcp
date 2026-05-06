@@ -1,6 +1,6 @@
 # fyndling-mcp
 
-[![smithery badge](https://smithery.ai/badge/ralf/fyndling)](https://smithery.ai/servers/ralf/fyndling)
+[![smithery badge](https://smithery.ai/badge/ralf/fyndling)](https://smithery.ai/servers/ralf/fyndling) [![neongrau/fyndling-mcp MCP server](https://glama.ai/mcp/servers/neongrau/fyndling-mcp/badges/score.svg)](https://glama.ai/mcp/servers/neongrau/fyndling-mcp)
 
 Built for **medieval market fans, reenactors, and living-history enthusiasts** — and the AI assistants that help them plan. Fyndling MCP gives AI clients direct access to two niche European datasets:
 
