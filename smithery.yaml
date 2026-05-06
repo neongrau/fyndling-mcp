@@ -1,4 +1,5 @@
 startCommand:
   type: http
   url: https://fyndling.de/mcp
-
+iconUrl: https://fyndling.de/favicon.ico
+repository: https://github.com/neongrau/fyndling-mcp
