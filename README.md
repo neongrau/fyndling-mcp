@@ -1,5 +1,7 @@
 # fyndling-mcp
 
+[![smithery badge](https://smithery.ai/badge/ralf/fyndling)](https://smithery.ai/servers/ralf/fyndling)
+
 Built for **medieval market fans, reenactors, and living-history enthusiasts** — and the AI assistants that help them plan. Fyndling MCP gives AI clients direct access to two niche European datasets:
 
 - **Medieval events** — query 2,000+ markets, concerts, castle experiences, and living-history events across 20 European countries by **location + radius + date range** (updated weekly)
