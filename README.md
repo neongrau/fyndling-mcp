@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 2,000+ markets, concerts, castle experiences, and living-history events across 20 European countries by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 1,100+ recipes from six cookbooks spanning the 13th–17th century, with modern German adaptations, structured ingredient lists, and original manuscript transcripts
+- **Historical recipes** — 1,170+ recipes from seven cookbooks spanning the 13th–17th century, with modern German adaptations, structured ingredient lists, and original manuscript transcripts
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -107,7 +107,7 @@ Find permanent medieval-themed locations (meaderies, castles, restaurants).
 
 #### `list_recipe_sources`
 
-List all six available cookbooks with metadata (year, language, region, recipe count).
+List all seven available cookbooks with metadata (year, language, region, recipe count).
 
 No parameters.
 
@@ -115,6 +115,7 @@ No parameters.
 
 | Key | Title | Year | Language | Recipes |
 |---|---|---|---|---|
+| `harpestreng` | Kogebog (Harpestreng-Handschrift NKS 66) | ~1300 | Old Danish | 25 |
 | `buch-guter-speise` | Das Buch von guter Speise | 1350 | Middle High German | 96 |
 | `form-of-cury` | The Forme of Cury | 1390 | Middle English | 192 |
 | `menagier` | Ménagier de Paris | 1393 | Old French | 380 |
@@ -134,7 +135,7 @@ Search historical recipes with filtering and ingredient matching.
 | `difficulty_max` | integer 1–3 | — | 1=easy, 2=medium, 3=advanced |
 | `lagerkueche` | boolean | — | Only recipes suitable for outdoor/camp cooking |
 | `source_key` | string | — | Filter by cookbook (see keys above) |
-| `epoch_from` | integer | — | Earliest source year (e.g. `1350`) |
+| `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
 | `epoch_to` | integer | — | Latest source year (e.g. `1500`) |
 | `ingredients` | string[] | — | Include filter: all listed must be present (partial match, AND logic) |
 | `exclude_courses` | string[] | — | Exclude these course types |
@@ -159,7 +160,7 @@ Search historical recipes with filtering and ingredient matching.
 | `condiment` | Sauces, spice pastes |
 | `other` | Miscellaneous |
 
-**Example — desserts with cinnamon and ginger, excluding Ingwer-heavy recipes:**
+**Example — desserts with cinnamon and ginger:**
 ```json
 {
   "course": "dessert",
@@ -178,6 +179,14 @@ Search historical recipes with filtering and ingredient matching.
 }
 ```
 
+**Example — all recipes from the oldest source (13th-century Denmark):**
+```json
+{
+  "source_key": "harpestreng",
+  "limit": 25
+}
+```
+
 **Recipe list fields** (full details stripped for list performance): `id`, `source_key`, `title_modern`, `course`, `difficulty`, `serves`, `prep_time_min`, `ingredients`, `lagerküche`, `published_at`
 
 ---
@@ -188,7 +197,7 @@ Get the full details of a single recipe.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `id` | string | ✓ | Recipe ID (e.g. `bgs-001`, `foc-015`, `men-042`) |
+| `id` | string | ✓ | Recipe ID (e.g. `hkb-001`, `bgs-001`, `foc-015`, `men-042`) |
 
 **Full response includes:**
 - `text_modern` — modern German adaptation of the recipe
@@ -198,6 +207,8 @@ Get the full details of a single recipe.
 - `faq` — common questions answered
 - `interpretive_choices` — editorial decisions on ambiguous passages
 - `scan` — link to manuscript scan image
+
+**Ingredient units:** `g`, `kg`, `ml`, `l`, `TL` (Teelöffel/teaspoon), `EL` (Esslöffel/tablespoon), `pinch`, `piece`, `slice`, `clove`, `bunch`, `sprig`, `leaf`, `cm`. Use `original_text` for display; `amount` + `unit` are for scaling only.
 
 **Example ingredient object:**
 ```json
@@ -241,7 +252,7 @@ Compose a multi-course menu from historical recipes. Automatically minimises ing
 
 **Events:** Germany, Austria, Switzerland, France, Poland, Czech Republic, Italy, Spain, Portugal, UK, Ireland, Belgium, Netherlands, Denmark, Sweden, Norway, Estonia, Lithuania, and more.
 
-**Recipes:** Six cookbooks from Würzburg, Paris, London, northern Italy, Prague, and Frankfurt — spanning Middle High German, Middle English, Old French, Early Italian, Early Czech, and Early New High German.
+**Recipes:** Seven cookbooks from Copenhagen, Würzburg, Paris, London, northern Italy, Prague, and Frankfurt — spanning Old Danish, Middle High German, Middle English, Old French, Early Italian, Early Czech, and Early New High German. The oldest source, the Harpestreng manuscript (NKS 66, ~1300), is the earliest surviving cookbook from northern Europe.
 
 ---
 
