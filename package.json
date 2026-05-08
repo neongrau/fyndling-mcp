@@ -1,0 +1,12 @@
+{
+  "name": "fyndling-mcp",
+  "version": "1.0.3",
+  "description": "MCP server for Fyndling — medieval events, POIs, and historical recipes",
+  "homepage": "https://fyndling.de",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neongrau/fyndling-mcp"
+  },
+  "keywords": ["mcp", "medieval", "recipes", "events", "history", "living-history", "reenactment"],
+  "license": "MIT"
+}
