@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 2,000+ markets, concerts, castle experiences, and living-history events across 20 European countries by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 1,175+ recipes from eight cookbooks spanning the 13th–17th century, with modern German adaptations, structured ingredient lists, and original manuscript transcripts
+- **Historical recipes** — 1,250+ recipes from ten cookbooks spanning the 13th–17th century, with modern German adaptations, structured ingredient lists, and original manuscript transcripts
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -107,7 +107,7 @@ Find permanent medieval-themed locations (meaderies, castles, restaurants).
 
 #### `list_recipe_sources`
 
-List all eight available cookbooks with metadata (year, language, region, recipe count).
+List all ten available cookbooks with metadata (year, language, region, recipe count).
 
 No parameters.
 
@@ -116,12 +116,14 @@ No parameters.
 | Key | Title | Year | Language | Recipes |
 |---|---|---|---|---|
 | `harpestreng` | Kogebog (Harpestreng-Handschrift NKS 66) | ~1300 | Old Danish | 25 |
-| `buch-guter-speise` | Das Buch von guter Speise | 1350 | Middle High German | 96 |
+| `viandier` | Le Viandier de Taillevent | ~1300 | Old French | 43 |
+| `buch-guter-speise` | Das Buch von guter Speise | 1350 | Middle High German | 101 |
 | `form-of-cury` | The Forme of Cury | 1390 | Middle English | 192 |
 | `menagier` | Ménagier de Paris | 1393 | Old French | 380 |
 | `martino` | Libro de Arte Coquinaria | 1465 | Early Italian | 268 |
-| `edelike_spijse` | Von guten und edlen Speisen (Wel ende edelike spijse) | ~1475 | Middle Dutch | 62 |
-| `severin` | Kuchařství (Böhmisches Kochbuch) | 1535 | Early Czech | ~100 |
+| `edelike_spijse` | Von guten und edlen Speisen (Wel ende edelike spijse) | ~1475 | Middle Dutch | 42 |
+| `tegernsee` | Tegernseer Speisenbuch (BSB Cgm 8137) | 1453–1534 | Early New High German (Bavarian) | 11 |
+| `severin` | Kuchařství (Böhmisches Kochbuch) | 1535 | Early Czech | 97 |
 | `koch_kellermeisterei` | Koch und Kellermeisterei | 1574 | Early New High German | 110 |
 
 ---
@@ -135,7 +137,7 @@ Search historical recipes with filtering and ingredient matching.
 | `course` | string | — | See course types below |
 | `difficulty_max` | integer 1–3 | — | 1=easy, 2=medium, 3=advanced |
 | `lagerkueche` | boolean | — | Only recipes suitable for outdoor/camp cooking |
-| `source_key` | string | — | Filter by cookbook: `harpestreng`, `buch-guter-speise`, `form-of-cury`, `menagier`, `martino`, `edelike_spijse`, `severin`, `koch_kellermeisterei` |
+| `source_key` | string | — | Filter by cookbook: `harpestreng`, `viandier`, `buch-guter-speise`, `form-of-cury`, `menagier`, `martino`, `edelike_spijse`, `tegernsee`, `severin`, `koch_kellermeisterei` |
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
 | `epoch_to` | integer | — | Latest source year (e.g. `1500`) |
 | `ingredients` | string[] | — | Include filter: all listed must be present (partial match, AND logic) |
@@ -197,6 +199,14 @@ Search historical recipes with filtering and ingredient matching.
 }
 ```
 
+**Example — Bavarian monastery cooking from the 15th century:**
+```json
+{
+  "source_key": "tegernsee",
+  "limit": 11
+}
+```
+
 **Recipe list fields** (full details stripped for list performance): `id`, `source_key`, `title_modern`, `course`, `difficulty`, `serves`, `prep_time_min`, `ingredients`, `lagerküche`, `published_at`
 
 ---
@@ -207,7 +217,7 @@ Get the full details of a single recipe.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `id` | string | ✓ | Recipe ID (e.g. `hkb-001`, `bgs-001`, `foc-015`, `men-042`, `wes-001`) |
+| `id` | string | ✓ | Recipe ID (e.g. `hkb-001`, `bgs-001`, `foc-015`, `men-042`, `wes-001`, `teg-001`) |
 
 **Full response includes:**
 - `text_modern` — modern German adaptation of the recipe
@@ -262,7 +272,9 @@ Compose a multi-course menu from historical recipes. Automatically minimises ing
 
 **Events:** Germany, Austria, Switzerland, France, Poland, Czech Republic, Italy, Spain, Portugal, UK, Ireland, Belgium, Netherlands, Denmark, Sweden, Norway, Estonia, Lithuania, and more.
 
-**Recipes:** Eight cookbooks from Copenhagen, Würzburg, Paris, London, northern Italy, Ghent, Prague, and Frankfurt — spanning Old Danish, Middle High German, Middle English, Old French, Early Italian, Middle Dutch, Early Czech, and Early New High German. The oldest source, the Harpestreng manuscript (NKS 66, ~1300), is the earliest surviving cookbook from northern Europe. The Ghent manuscript (BHSL.HS.1035, ~1475) is the only fully preserved Middle Dutch recipe collection of its era, representing the refined courtly cuisine of the Flemish dukes.
+**Recipes:** Ten cookbooks spanning Old Danish, Middle High German, Old French, Middle English, Early Italian, Middle Dutch, Early New High German (Bavarian), and Early Czech — from Copenhagen, Paris, London, Würzburg, northern Italy, Ghent, Munich/Tegernsee, Prague, and Frankfurt. Covering the 13th to 17th century.
+
+Notable sources: The Harpestreng manuscript (NKS 66, ~1300) is the earliest surviving cookbook from northern Europe. Le Viandier de Taillevent (~1300) is one of the most influential French court cookbooks of the Middle Ages. The Ghent manuscript (BHSL.HS.1035, ~1475) is the only fully preserved Middle Dutch recipe collection of its era. The Tegernseer Speisenbuch (BSB Cgm 8137, 1453–1534) documents Benedictine monastery cuisine from Bavaria and contains the oldest known written record of the name *Rutschart* (today's *Ritschert*).
 
 ---
 
