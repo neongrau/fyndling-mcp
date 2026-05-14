@@ -1,6 +1,6 @@
 {
   "name": "fyndling-mcp",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "MCP server for Fyndling — medieval events, POIs, and historical recipes",
   "homepage": "https://fyndling.de",
   "repository": {

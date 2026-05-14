@@ -138,6 +138,7 @@ Search historical recipes with filtering and ingredient matching.
 | `difficulty_max` | integer 1–3 | — | 1=easy, 2=medium, 3=advanced |
 | `lagerkueche` | boolean | — | Only recipes suitable for outdoor/camp cooking |
 | `source_key` | string | — | Filter by cookbook: `harpestreng`, `viandier`, `buch-guter-speise`, `form-of-cury`, `menagier`, `martino`, `edelike_spijse`, `tegernsee`, `severin`, `koch_kellermeisterei` |
+| `dietary` | string | — | `vegetarian` (no meat/fish, eggs/dairy allowed) or `vegan` (no animal products; almond milk and honey accepted by convention). Vegan recipes are also tagged vegetarian, so `vegetarian` includes the vegan ones. |
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
 | `epoch_to` | integer | — | Latest source year (e.g. `1500`) |
 | `ingredients` | string[] | — | Include filter: all listed must be present (partial match, AND logic) |
@@ -207,7 +208,16 @@ Search historical recipes with filtering and ingredient matching.
 }
 ```
 
-**Recipe list fields** (full details stripped for list performance): `id`, `source_key`, `title_modern`, `course`, `difficulty`, `serves`, `prep_time_min`, `ingredients`, `lagerküche`, `published_at`
+**Example — vegan desserts (lent-friendly sweets, no animal products):**
+```json
+{
+  "course": "dessert",
+  "dietary": "vegan",
+  "limit": 10
+}
+```
+
+**Recipe list fields** (full details stripped for list performance): `id`, `source_key`, `title_modern`, `course`, `difficulty`, `serves`, `prep_time_min`, `ingredients`, `lagerküche`, `published_at`, `fyndling_url` (canonical link to the recipe page on fyndling.de)
 
 ---
 
@@ -227,6 +237,7 @@ Get the full details of a single recipe.
 - `faq` — common questions answered
 - `interpretive_choices` — editorial decisions on ambiguous passages
 - `scan` — link to manuscript scan image
+- `fyndling_url` — canonical link to the recipe page on fyndling.de (e.g. `https://fyndling.de/rezepte/mar-005/`)
 
 **Ingredient units:** `g`, `kg`, `ml`, `l`, `TL` (Teelöffel/teaspoon), `EL` (Esslöffel/tablespoon), `pinch`, `piece`, `slice`, `clove`, `bunch`, `sprig`, `leaf`, `cm`. Use `original_text` for display; `amount` + `unit` are for scaling only.
 
@@ -253,6 +264,7 @@ Compose a multi-course menu from historical recipes. Automatically minimises ing
 | `persons` | integer | — | Number of persons (informational, included in output) |
 | `max_difficulty` | integer 1–3 | — | Maximum difficulty for any course |
 | `lagerkueche` | boolean | — | Only camp-cooking-suitable recipes |
+| `dietary` | string | — | `vegetarian` or `vegan` — applied to every course (vegan recipes are also tagged vegetarian) |
 | `epoch_from` | integer | — | Earliest source year |
 | `epoch_to` | integer | — | Latest source year |
 
@@ -263,6 +275,15 @@ Compose a multi-course menu from historical recipes. Automatically minimises ing
   "persons": 8,
   "epoch_from": 1300,
   "epoch_to": 1400
+}
+```
+
+**Example — vegetarian 3-course menu for 6:**
+```json
+{
+  "courses": ["starter", "main_other", "dessert"],
+  "persons": 6,
+  "dietary": "vegetarian"
 }
 ```
 
