@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 2,000+ markets, concerts, castle experiences, and living-history events across 20 European countries by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 1,250+ recipes from ten cookbooks spanning the 13th–17th century, with modern German adaptations, structured ingredient lists, and original manuscript transcripts
+- **Historical recipes** — 1,400+ recipes from thirteen cookbooks spanning the 13th–17th century, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -107,7 +107,7 @@ Find permanent medieval-themed locations (meaderies, castles, restaurants).
 
 #### `list_recipe_sources`
 
-List all ten available cookbooks with metadata (year, language, region, recipe count).
+List all available cookbooks with metadata (year, language, region, recipe count) and the full course taxonomy (atomic values + aliases).
 
 No parameters.
 
@@ -116,15 +116,38 @@ No parameters.
 | Key | Title | Year | Language | Recipes |
 |---|---|---|---|---|
 | `harpestreng` | Kogebog (Harpestreng-Handschrift NKS 66) | ~1300 | Old Danish | 25 |
-| `viandier` | Le Viandier de Taillevent | ~1300 | Old French | 43 |
+| `viandier` | Le Viandier de Taillevent | ~1300 | Old French | 55 |
 | `buch-guter-speise` | Das Buch von guter Speise | 1350 | Middle High German | 101 |
 | `form-of-cury` | The Forme of Cury | 1390 | Middle English | 192 |
-| `menagier` | Ménagier de Paris | 1393 | Old French | 380 |
-| `martino` | Libro de Arte Coquinaria | 1465 | Early Italian | 268 |
-| `edelike_spijse` | Von guten und edlen Speisen (Wel ende edelike spijse) | ~1475 | Middle Dutch | 42 |
+| `anonimo_toscano` | Anonimo Toscano (Libro della cocina) — *pilot* | ~1390 | Tuscan Volgare | 30 |
+| `menagier` | Ménagier de Paris | 1393 | Old French | 379 |
+| `bockenheim` | Registrum Coquine (Johannes von Bockenheim) | ~1433 | Medieval Latin | 64 |
 | `tegernsee` | Tegernseer Speisenbuch (BSB Cgm 8137) | 1453–1534 | Early New High German (Bavarian) | 11 |
-| `severin` | Kuchařství (Böhmisches Kochbuch) | 1535 | Early Czech | 97 |
+| `meister_hans` | Kochbuch des Meister Hans (Cgm 384) | ~1460 | Early New High German (Alemannic–Swabian) | 69 |
+| `martino` | Libro de Arte Coquinaria | 1465 | Early Italian | 268 |
+| `edelike_spijse` | Von guten und edlen Speisen (Wel ende edelike spijse) | ~1475 | Middle Dutch | 62 |
+| `severin` | Kuchařství (Böhmisches Kochbuch) | 1535 | Early Czech | 92 |
 | `koch_kellermeisterei` | Koch und Kellermeisterei | 1574 | Early New High German | 110 |
+
+---
+
+#### `list_recipe_tags`
+
+List the controlled tag vocabulary, grouped by category (`dish_type`, `diet`, `social_class`), with labels, descriptions and current recipe counts. Use these tag IDs as values for the `tags` parameter in `search_recipes` and `compose_menu`.
+
+No parameters.
+
+**Tag groups:**
+
+| Group | Tags |
+|---|---|
+| `dish_type` | `pasta`, `reis`, `brei`, `beilage`, `huelsenfruechte`, `brot` |
+| `diet` | `vegetarisch`, `vegan`, `fastenspeise` |
+| `social_class` | `hofkueche`, `buergerlich`, `bauernkueche` |
+
+Tag IDs are German (kebab-style). Pass them verbatim to `search_recipes(tags=[...])`. Multiple tags combine with AND logic — `tags=["hofkueche", "vegetarisch"]` returns only vegetarian dishes that are also tagged as courtly cuisine. Social-class tags can co-occur on a single recipe when a source explicitly addresses multiple classes (classic Bockenheim pattern: *"et erit bonum pro ciuibus Rusticis et nobilibus"* → both `bauernkueche` and `hofkueche`).
+
+The `dietary` filter in `search_recipes` is a convenience alias: `dietary="vegetarian"` is equivalent to `tags=["vegetarisch"]`, and `dietary="vegan"` to `tags=["vegan"]`. Note that vegan recipes also carry the `vegetarisch` tag, so `dietary="vegetarian"` returns both groups.
 
 ---
 
@@ -137,8 +160,9 @@ Search historical recipes with filtering and ingredient matching.
 | `course` | string | — | See course types below |
 | `difficulty_max` | integer 1–3 | — | 1=easy, 2=medium, 3=advanced |
 | `lagerkueche` | boolean | — | Only recipes suitable for outdoor/camp cooking |
-| `source_key` | string | — | Filter by cookbook: `harpestreng`, `viandier`, `buch-guter-speise`, `form-of-cury`, `menagier`, `martino`, `edelike_spijse`, `tegernsee`, `severin`, `koch_kellermeisterei` |
-| `dietary` | string | — | `vegetarian` (no meat/fish, eggs/dairy allowed) or `vegan` (no animal products; almond milk and honey accepted by convention). Vegan recipes are also tagged vegetarian, so `vegetarian` includes the vegan ones. |
+| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list; valid values are `anonimo_toscano`, `bockenheim`, `buch-guter-speise`, `edelike_spijse`, `form-of-cury`, `harpestreng`, `koch_kellermeisterei`, `martino`, `meister_hans`, `menagier`, `severin`, `tegernsee`, `viandier`. |
+| `dietary` | string | — | `vegetarian` (no meat/fish, eggs/dairy allowed) or `vegan` (no animal products; almond milk and honey accepted by convention). Vegan recipes are also tagged vegetarian, so `vegetarian` includes the vegan ones. Equivalent to `tags=["vegetarisch"]` / `tags=["vegan"]`. |
+| `tags` | string[] | — | Controlled-vocabulary tag filter (AND logic, max 6). Vocabulary: `pasta`, `reis`, `brei`, `beilage`, `huelsenfruechte`, `brot` (dish type); `vegetarisch`, `vegan`, `fastenspeise` (diet); `hofkueche`, `buergerlich`, `bauernkueche` (social class). Call `list_recipe_tags` for descriptions. |
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
 | `epoch_to` | integer | — | Latest source year (e.g. `1500`) |
 | `ingredients` | string[] | — | Include filter: all listed must be present (partial match, AND logic) |
@@ -217,6 +241,22 @@ Search historical recipes with filtering and ingredient matching.
 }
 ```
 
+**Example — courtly bread-based dishes (banquet-grade Backwerk):**
+```json
+{
+  "tags": ["hofkueche", "brot"],
+  "limit": 10
+}
+```
+
+**Example — peasant-class lent food (rural fast-day dishes):**
+```json
+{
+  "tags": ["bauernkueche", "fastenspeise"],
+  "limit": 20
+}
+```
+
 **Recipe list fields** (full details stripped for list performance): `id`, `source_key`, `title_modern`, `course`, `difficulty`, `serves`, `prep_time_min`, `ingredients`, `lagerküche`, `published_at`, `fyndling_url` (canonical link to the recipe page on fyndling.de)
 
 ---
@@ -265,6 +305,7 @@ Compose a multi-course menu from historical recipes. Automatically minimises ing
 | `max_difficulty` | integer 1–3 | — | Maximum difficulty for any course |
 | `lagerkueche` | boolean | — | Only camp-cooking-suitable recipes |
 | `dietary` | string | — | `vegetarian` or `vegan` — applied to every course (vegan recipes are also tagged vegetarian) |
+| `tags` | string[] | — | Controlled-vocabulary tags applied to every course (AND logic, max 6). Useful for thematic menus, e.g. `["hofkueche"]` for a courtly banquet or `["bauernkueche"]` for a peasant-class meal. See `list_recipe_tags` for the vocabulary. |
 | `epoch_from` | integer | — | Earliest source year |
 | `epoch_to` | integer | — | Latest source year |
 
@@ -287,15 +328,24 @@ Compose a multi-course menu from historical recipes. Automatically minimises ing
 }
 ```
 
+**Example — courtly banquet (5-course Hofküche dinner for 12):**
+```json
+{
+  "courses": ["starter", "main_fish", "main_poultry", "main_game", "dessert"],
+  "persons": 12,
+  "tags": ["hofkueche"]
+}
+```
+
 ---
 
 ## Coverage
 
 **Events:** Germany, Austria, Switzerland, France, Poland, Czech Republic, Italy, Spain, Portugal, UK, Ireland, Belgium, Netherlands, Denmark, Sweden, Norway, Estonia, Lithuania, and more.
 
-**Recipes:** Ten cookbooks spanning Old Danish, Middle High German, Old French, Middle English, Early Italian, Middle Dutch, Early New High German (Bavarian), and Early Czech — from Copenhagen, Paris, London, Würzburg, northern Italy, Ghent, Munich/Tegernsee, Prague, and Frankfurt. Covering the 13th to 17th century.
+**Recipes:** Thirteen cookbooks spanning Old Danish, Old French, Middle High German, Middle English, Tuscan Volgare, Medieval Latin, Middle Dutch, Early New High German (Bavarian + Alemannic–Swabian), Early Italian, and Early Czech — from Copenhagen, Paris, London, Würzburg, Florence, Frankfurt-am-Main, Ghent, Munich/Tegernsee, the Upper Rhine, northern Italy, Prague, and Frankfurt. Covering the 13th to 17th century.
 
-Notable sources: The Harpestreng manuscript (NKS 66, ~1300) is the earliest surviving cookbook from northern Europe. Le Viandier de Taillevent (~1300) is one of the most influential French court cookbooks of the Middle Ages. The Ghent manuscript (BHSL.HS.1035, ~1475) is the only fully preserved Middle Dutch recipe collection of its era. The Tegernseer Speisenbuch (BSB Cgm 8137, 1453–1534) documents Benedictine monastery cuisine from Bavaria and contains the oldest known written record of the name *Rutschart* (today's *Ritschert*).
+Notable sources: The Harpestreng manuscript (NKS 66, ~1300) is the earliest surviving cookbook from northern Europe. Le Viandier de Taillevent (~1300) is one of the most influential French court cookbooks of the Middle Ages. The Registrum Coquine of Johannes von Bockenheim (~1433, BnF Ms. Latin 7054) is a Latin compilation from the papal court of Martin V that explicitly labels recipes by social class — "pro magnatibus", "pro communibus", "pro rusticis". The Ghent manuscript (BHSL.HS.1035, ~1475) is the only fully preserved Middle Dutch recipe collection of its era. The Tegernseer Speisenbuch (BSB Cgm 8137, 1453–1534) documents Benedictine monastery cuisine from Bavaria and contains the oldest known written record of the name *Rutschart* (today's *Ritschert*).
 
 ---
 
