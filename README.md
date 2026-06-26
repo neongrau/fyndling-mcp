@@ -4,9 +4,9 @@
 
 Built for **medieval market fans, reenactors, and living-history enthusiasts** — and the AI assistants that help them plan. Fyndling MCP gives AI clients direct access to two niche European datasets:
 
-- **Medieval events** — query 2,000+ markets, concerts, castle experiences, and living-history events across 20 European countries by **location + radius + date range** (updated weekly)
-- **Permanent POIs** — meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 1,400+ recipes from thirteen cookbooks spanning the 13th–17th century, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
+- **Medieval events** — query 3,700+ markets, concerts, castle experiences, living-history events, and renaissance faires across 25+ countries in Europe and North America, by **location + radius + date range** (updated weekly)
+- **Permanent POIs** — 1,900+ meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
+- **Historical recipes** — nearly 2,000 recipes from **twenty-two cookbooks** spanning the 13th–16th century, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -111,23 +111,34 @@ List all available cookbooks with metadata (year, language, region, recipe count
 
 No parameters.
 
-**Sources:**
+**Sources** (22 active cookbooks, ordered by date):
 
 | Key | Title | Year | Language | Recipes |
 |---|---|---|---|---|
 | `harpestreng` | Kogebog (Harpestreng-Handschrift NKS 66) | ~1300 | Old Danish | 25 |
 | `viandier` | Le Viandier de Taillevent | ~1300 | Old French | 55 |
-| `buch-guter-speise` | Das Buch von guter Speise | 1350 | Middle High German | 101 |
-| `form-of-cury` | The Forme of Cury | 1390 | Middle English | 192 |
-| `anonimo_toscano` | Anonimo Toscano (Libro della cocina) — *pilot* | ~1390 | Tuscan Volgare | 30 |
+| `buch-guter-speise` | Das Buch von guter Speise | ~1350 | Middle High German | 101 |
+| `anonimo_toscano` | Anonimo Toscano (Libro della cocina) | ~1390 | Tuscan Volgare | 40 |
+| `form-of-cury` | The Forme of Cury | ~1390 | Middle English | 192 |
 | `menagier` | Ménagier de Paris | 1393 | Old French | 379 |
-| `bockenheim` | Registrum Coquine (Johannes von Bockenheim) | ~1433 | Medieval Latin | 64 |
-| `tegernsee` | Tegernseer Speisenbuch (BSB Cgm 8137) | 1453–1534 | Early New High German (Bavarian) | 11 |
-| `meister_hans` | Kochbuch des Meister Hans (Cgm 384) | ~1460 | Early New High German (Alemannic–Swabian) | 69 |
-| `martino` | Libro de Arte Coquinaria | 1465 | Early Italian | 268 |
+| `bockenheim` | Registrum Coquine (Johannes von Bockenheim) | ~1433 | Medieval Latin | 70 |
+| `muenchner_cgm811` | Münchner Handschrift Cgm 811 | ~1440 | Early New High German (Swabian–Bavarian) | 4 |
+| `rheinfraenkisches_kochbuch` | Rheinfränkisches Kochbuch | ~1445 | Rhine-Franconian (Middle High German) | 76 |
+| `meister_hans` | Kochbuch des Meisters Hans (Cgm 384) | ~1460 | Early New High German (Alemannic–Swabian) | 113 |
+| `muenchner_clm15632` | Klosterkochbuch Rott am Inn (Clm 15632) | 1458/1464 | Early New High German (Bavarian) | 55 |
+| `tegernsee` | Tegernseer Speisenbuch | 1453–1534 | Early New High German (Bavarian) | 51 |
+| `martino` | Libro de Arte Coquinaria | ~1465 | Early Italian | 268 |
+| `koenigsberger_kochbuch` | Königsberger Kochbuch (Deutschordensarchiv) | 15th c. | Early New High German (Bavarian / East-Central) | 25 |
+| `muenchner_cgm384` | Münchner Handschrift Cgm 384 | ~1470 | Early New High German (Alemannic) | 83 |
 | `edelike_spijse` | Von guten und edlen Speisen (Wel ende edelike spijse) | ~1475 | Middle Dutch | 62 |
-| `severin` | Kuchařství (Böhmisches Kochbuch) | 1535 | Early Czech | 92 |
+| `muenchner_cgm467` | Hausbuch aus Dietramszell (Cgm 467) | ~1477 | Early New High German (Bavarian) | 3 |
+| `muenchner_cgm725` | Münchner Handschrift Cgm 725 | late 15th c. | Early New High German (Bavarian) | 22 |
+| `muenchner_cgm349` | Münchner Handschrift Cgm 349 | 16th c. (addendum) | Early New High German (Bavarian) | 4 |
+| `muenchner_cgm5919` | Regensburger Kochbuch (Cgm 5919) | ~1505 | Early New High German (Bavarian) | 104 |
+| `severin` | Kuchařství (Böhmisches Kochbuch) | 1535 | Early Czech | 147 |
 | `koch_kellermeisterei` | Koch und Kellermeisterei | 1574 | Early New High German | 110 |
+
+The **Recipes** column above is the number of recipes *currently available* from each source. Note that the `recipe_count` field returned by `list_recipe_sources` reflects each manuscript's *full* recipe count (its total editorial scope) — for sources still being ingested, that figure can be higher than what `search_recipes` returns today. The corpus is reviewed and published source-by-source, so all counts grow over time.
 
 ---
 
@@ -160,7 +171,7 @@ Search historical recipes with filtering and ingredient matching.
 | `course` | string | — | See course types below |
 | `difficulty_max` | integer 1–3 | — | 1=easy, 2=medium, 3=advanced |
 | `lagerkueche` | boolean | — | Only recipes suitable for outdoor/camp cooking |
-| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list; valid values are `anonimo_toscano`, `bockenheim`, `buch-guter-speise`, `edelike_spijse`, `form-of-cury`, `harpestreng`, `koch_kellermeisterei`, `martino`, `meister_hans`, `menagier`, `severin`, `tegernsee`, `viandier`. |
+| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list (22 active sources). |
 | `dietary` | string | — | `vegetarian` (no meat/fish, eggs/dairy allowed) or `vegan` (no animal products; almond milk and honey accepted by convention). Vegan recipes are also tagged vegetarian, so `vegetarian` includes the vegan ones. Equivalent to `tags=["vegetarisch"]` / `tags=["vegan"]`. |
 | `tags` | string[] | — | Controlled-vocabulary tag filter (AND logic, max 6). Vocabulary: `pasta`, `reis`, `brei`, `beilage`, `huelsenfruechte`, `brot` (dish type); `vegetarisch`, `vegan`, `fastenspeise` (diet); `hofkueche`, `buergerlich`, `bauernkueche` (social class). Call `list_recipe_tags` for descriptions. |
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
@@ -181,7 +192,9 @@ Search historical recipes with filtering and ingredient matching.
 | `main_game` | Game mains (venison, hare, …) |
 | `main_fish` | Fish mains |
 | `main_other` | Other mains |
-| `main_meat` | **Alias** — all meat mains combined |
+| `main_vegetarian` | Vegetarian mains |
+| `main` | **Alias** — all mains combined (meat + fish + other + vegetarian) |
+| `main_meat` | **Alias** — all meat mains (no fish) |
 | `side` | Side dishes |
 | `dessert` | Desserts / sweet dishes |
 | `drink` / `beverage` | Beverages (`beverage` is an alias for `drink`) |
@@ -224,11 +237,11 @@ Search historical recipes with filtering and ingredient matching.
 }
 ```
 
-**Example — Bavarian monastery cooking from the 15th century:**
+**Example — the Regensburg manuscript (Cgm 5919, ~1500):**
 ```json
 {
-  "source_key": "tegernsee",
-  "limit": 11
+  "source_key": "muenchner_cgm5919",
+  "limit": 20
 }
 ```
 
@@ -267,7 +280,7 @@ Get the full details of a single recipe.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `id` | string | ✓ | Recipe ID (e.g. `hkb-001`, `bgs-001`, `foc-015`, `men-042`, `wes-001`, `teg-001`) |
+| `id` | string | ✓ | Recipe ID (e.g. `hkb-001`, `bgs-001`, `foc-015`, `men-042`, `m384-001`, `m5919-010`) |
 
 **Full response includes:**
 - `text_modern` — modern German adaptation of the recipe
@@ -279,7 +292,7 @@ Get the full details of a single recipe.
 - `scan` — link to manuscript scan image
 - `fyndling_url` — canonical link to the recipe page on fyndling.de (e.g. `https://fyndling.de/rezepte/mar-005/`)
 
-**Ingredient units:** `g`, `kg`, `ml`, `l`, `TL` (Teelöffel/teaspoon), `EL` (Esslöffel/tablespoon), `pinch`, `piece`, `slice`, `clove`, `bunch`, `sprig`, `leaf`, `cm`. Use `original_text` for display; `amount` + `unit` are for scaling only.
+**Ingredient units:** `g`, `kg`, `ml`, `l`, `TL` (Teelöffel/teaspoon), `EL` (Esslöffel/tablespoon), `tsp`, `tbsp`, `pinch`, `piece`, `slice`, `clove`, `bunch`, `sprig`, `leaf`, `cm`. Use `original_text` for display; `amount` + `unit` are for scaling only.
 
 **Example ingredient object:**
 ```json
@@ -322,7 +335,7 @@ Compose a multi-course menu from historical recipes. Automatically minimises ing
 **Example — vegetarian 3-course menu for 6:**
 ```json
 {
-  "courses": ["starter", "main_other", "dessert"],
+  "courses": ["starter", "main_vegetarian", "dessert"],
   "persons": 6,
   "dietary": "vegetarian"
 }
@@ -341,11 +354,11 @@ Compose a multi-course menu from historical recipes. Automatically minimises ing
 
 ## Coverage
 
-**Events:** Germany, Austria, Switzerland, France, Poland, Czech Republic, Italy, Spain, Portugal, UK, Ireland, Belgium, Netherlands, Denmark, Sweden, Norway, Estonia, Lithuania, and more.
+**Events:** Germany, Austria, Switzerland, France, Poland, Czech Republic, Italy, Spain, Portugal, UK, Ireland, Belgium, Netherlands, Luxembourg, Denmark, Sweden, Norway, Finland, Estonia, Lithuania, and more — plus renaissance faires in the United States, Canada, Mexico, and beyond.
 
-**Recipes:** Thirteen cookbooks spanning Old Danish, Old French, Middle High German, Middle English, Tuscan Volgare, Medieval Latin, Middle Dutch, Early New High German (Bavarian + Alemannic–Swabian), Early Italian, and Early Czech — from Copenhagen, Paris, London, Würzburg, Florence, Frankfurt-am-Main, Ghent, Munich/Tegernsee, the Upper Rhine, northern Italy, Prague, and Frankfurt. Covering the 13th to 17th century.
+**Recipes:** Twenty-two cookbooks spanning Old Danish, Old French, Middle High German, Middle English, Tuscan Volgare, Medieval Latin, Middle Dutch, Early New High German (Bavarian, Alemannic–Swabian, Rhine-Franconian), Early Italian, and Early Czech — from Copenhagen, Paris, London, Würzburg, Florence, the papal court at Rome, Ghent, the Upper Rhine, northern Italy, Prague, Frankfurt-am-Main, and a dense cluster of South-German manuscripts: Munich (BSB Cgm 384, 467, 725, 811, 5919, Cgm 349, Clm 15632), Tegernsee, Rott am Inn, Dietramszell, Regensburg, and the Teutonic-Order Königsberg fragment. Covering the 13th to 16th century.
 
-Notable sources: The Harpestreng manuscript (NKS 66, ~1300) is the earliest surviving cookbook from northern Europe. Le Viandier de Taillevent (~1300) is one of the most influential French court cookbooks of the Middle Ages. The Registrum Coquine of Johannes von Bockenheim (~1433, BnF Ms. Latin 7054) is a Latin compilation from the papal court of Martin V that explicitly labels recipes by social class — "pro magnatibus", "pro communibus", "pro rusticis". The Ghent manuscript (BHSL.HS.1035, ~1475) is the only fully preserved Middle Dutch recipe collection of its era. The Tegernseer Speisenbuch (BSB Cgm 8137, 1453–1534) documents Benedictine monastery cuisine from Bavaria and contains the oldest known written record of the name *Rutschart* (today's *Ritschert*).
+Notable sources: The Harpestreng manuscript (NKS 66, ~1300) is the earliest surviving cookbook from northern Europe. Le Viandier de Taillevent (~1300) is one of the most influential French court cookbooks of the Middle Ages. The Registrum Coquine of Johannes von Bockenheim (~1433, BnF Ms. Latin 7054) is a Latin compilation from the papal court of Martin V that explicitly labels recipes by social class — "pro magnatibus", "pro communibus", "pro rusticis". The Ghent manuscript (BHSL.HS.1035, ~1475) is the only fully preserved Middle Dutch recipe collection of its era. The Tegernseer Speisenbuch (BSB Cgm 8137, 1453–1534) documents Benedictine monastery cuisine from Bavaria and contains the oldest known written record of the name *Rutschart* (today's *Ritschert*). The South-German manuscript cluster (Munich/Regensburg/Tegernsee) makes Fyndling one of the largest structured digital corpora of 15th–16th-century German cookbook recipes.
 
 ---
 
@@ -354,3 +367,5 @@ Notable sources: The Harpestreng manuscript (NKS 66, ~1300) is the earliest surv
 Event data is aggregated from public sources; accuracy is not guaranteed — always verify with the organiser.
 
 Recipe texts and modern adaptations: © [Fyndling](https://fyndling.de), CC BY-SA 4.0. Original medieval texts are in the public domain.
+</content>
+</invoke>
