@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 3,700+ markets, concerts, castle experiences, living-history events, and renaissance faires across 25+ countries in Europe and North America, by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — 1,900+ meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — nearly 2,000 recipes from **twenty-two cookbooks** spanning the 13th–16th century, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
+- **Historical recipes** — over 2,000 recipes from **twenty-four cookbooks** spanning the 13th–16th century, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -111,7 +111,7 @@ List all available cookbooks with metadata (year, language, region, recipe count
 
 No parameters.
 
-**Sources** (22 active cookbooks, ordered by date):
+**Sources** (24 active cookbooks, ordered by date):
 
 | Key | Title | Year | Language | Recipes |
 |---|---|---|---|---|
@@ -124,6 +124,7 @@ No parameters.
 | `bockenheim` | Registrum Coquine (Johannes von Bockenheim) | ~1433 | Medieval Latin | 70 |
 | `muenchner_cgm811` | Münchner Handschrift Cgm 811 | ~1440 | Early New High German (Swabian–Bavarian) | 4 |
 | `rheinfraenkisches_kochbuch` | Rheinfränkisches Kochbuch | ~1445 | Rhine-Franconian (Middle High German) | 76 |
+| `meister_eberhard` | Kochbuch Meister Eberhards | ~1450 | Early New High German (Bavarian) | 23 |
 | `meister_hans` | Kochbuch des Meisters Hans (Cgm 384) | ~1460 | Early New High German (Alemannic–Swabian) | 113 |
 | `muenchner_clm15632` | Klosterkochbuch Rott am Inn (Clm 15632) | 1458/1464 | Early New High German (Bavarian) | 55 |
 | `tegernsee` | Tegernseer Speisenbuch | 1453–1534 | Early New High German (Bavarian) | 51 |
@@ -132,6 +133,7 @@ No parameters.
 | `muenchner_cgm384` | Münchner Handschrift Cgm 384 | ~1470 | Early New High German (Alemannic) | 83 |
 | `edelike_spijse` | Von guten und edlen Speisen (Wel ende edelike spijse) | ~1475 | Middle Dutch | 62 |
 | `muenchner_cgm467` | Hausbuch aus Dietramszell (Cgm 467) | ~1477 | Early New High German (Bavarian) | 3 |
+| `mondseer_kochbuch` | Mondseer Kochbuch (Graz, UB Ms. 1609) | ~1480 | Early New High German (Bavarian–Austrian) | 50 |
 | `muenchner_cgm725` | Münchner Handschrift Cgm 725 | late 15th c. | Early New High German (Bavarian) | 22 |
 | `muenchner_cgm349` | Münchner Handschrift Cgm 349 | 16th c. (addendum) | Early New High German (Bavarian) | 4 |
 | `muenchner_cgm5919` | Regensburger Kochbuch (Cgm 5919) | ~1505 | Early New High German (Bavarian) | 104 |
@@ -171,7 +173,7 @@ Search historical recipes with filtering and ingredient matching.
 | `course` | string | — | See course types below |
 | `difficulty_max` | integer 1–3 | — | 1=easy, 2=medium, 3=advanced |
 | `lagerkueche` | boolean | — | Only recipes suitable for outdoor/camp cooking |
-| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list (22 active sources). |
+| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list (24 active sources). |
 | `dietary` | string | — | `vegetarian` (no meat/fish, eggs/dairy allowed) or `vegan` (no animal products; almond milk and honey accepted by convention). Vegan recipes are also tagged vegetarian, so `vegetarian` includes the vegan ones. Equivalent to `tags=["vegetarisch"]` / `tags=["vegan"]`. |
 | `tags` | string[] | — | Controlled-vocabulary tag filter (AND logic, max 6). Vocabulary: `pasta`, `reis`, `brei`, `beilage`, `huelsenfruechte`, `brot` (dish type); `vegetarisch`, `vegan`, `fastenspeise` (diet); `hofkueche`, `buergerlich`, `bauernkueche` (social class). Call `list_recipe_tags` for descriptions. |
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
