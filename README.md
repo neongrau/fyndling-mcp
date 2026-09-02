@@ -4,9 +4,9 @@
 
 Built for **medieval market fans, reenactors, and living-history enthusiasts** — and the AI assistants that help them plan. Fyndling MCP gives AI clients direct access to two niche European datasets:
 
-- **Medieval events** — query 5,700+ markets, concerts, castle experiences, living-history events, and renaissance faires across 26+ countries in Europe and North America, by **location + radius + date range** (updated weekly)
+- **Medieval events** — query 5,800+ markets, concerts, castle experiences, living-history events, and renaissance faires across 26+ countries in Europe and North America, by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — 1,900+ meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 3,200+ recipes from **thirty-six cookbooks** spanning the 13th–16th century, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
+- **Historical recipes** — 3,300+ recipes from **thirty-seven cookbooks** spanning the 13th–16th century, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -149,7 +149,8 @@ No parameters.
 | `muenchner_cgm5919` | Regensburger Kochbuch (Cgm 5919) | ~1505 | Early New High German (Bavarian) | 104 |
 | `severin` | Kuchařství (Böhmisches Kochbuch) | 1535 | Early Czech | 147 |
 | `corema_wo10` | Wolfenbüttel, Herzog-August-Bibliothek, Cod. Guelf. 42.3-5. Aug. 4° | 1543 | Early New High German | 97 |
-| `sabina_welserin` | Das Kochbuch der Sabina Welserin | 1553 | Early New High German (East Swabian/Augsburg) | 189 |
+| `staindl` | Ein künstlichs vnd nutzlichs Kochbuch (Balthasar Staindl) | 1545 | Early New High German (Swabian/Augsburg) | 35 |
+| `sabina_welserin` | Das Kochbuch der Sabina Welserin | 1553 | Early New High German (East Swabian/Augsburg) | 206 |
 | `koch_kellermeisterei` | Koch und Kellermeisterei | 1574 | Early New High German | 110 |
 
 The **Recipes** column above is the number of recipes *currently available* from each source. Note that the `recipe_count` field returned by `list_recipe_sources` reflects each manuscript's *full* recipe count (its total editorial scope) — for sources still being ingested, that figure can be higher than what `search_recipes` returns today. The corpus is reviewed and published source-by-source, so all counts grow over time.
