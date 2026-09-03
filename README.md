@@ -148,7 +148,7 @@ No parameters.
 | `muenchner_cgm349` | Münchner Handschrift Cgm 349 | 16th c. (addendum) | Early New High German (Bavarian) | 4 |
 | `muenchner_cgm5919` | Regensburger Kochbuch (Cgm 5919) | ~1505 | Early New High German (Bavarian) | 104 |
 | `severin` | Kuchařství (Böhmisches Kochbuch) | 1535 | Early Czech | 147 |
-| `corema_wo10` | Wolfenbüttel, Herzog-August-Bibliothek, Cod. Guelf. 42.3-5. Aug. 4° | 1543 | Early New High German | 97 |
+| `corema_wo10` | Wolfenbüttel, Herzog-August-Bibliothek, Cod. Guelf. 42.3-5. Aug. 4° | 1543 | Early New High German | 116 |
 | `staindl` | Ein künstlichs vnd nutzlichs Kochbuch (Balthasar Staindl) | 1545 | Early New High German (Swabian/Augsburg) | 35 |
 | `sabina_welserin` | Das Kochbuch der Sabina Welserin | 1553 | Early New High German (East Swabian/Augsburg) | 206 |
 | `koch_kellermeisterei` | Koch und Kellermeisterei | 1574 | Early New High German | 110 |
