@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 5,800+ markets, concerts, castle experiences, living-history events, and renaissance faires across 26+ countries in Europe and North America, by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — 1,900+ meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 3,688+ recipes from **thirty-eight cookbooks** spanning the 13th–16th century, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
+- **Historical recipes** — 4,009+ recipes from **thirty-eight cookbooks** spanning the 13th–16th century, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -118,7 +118,7 @@ No parameters.
 | `harpestreng` | Kogebog (Harpestreng-Handschrift NKS 66) | ~1300 | Old Danish | 25 |
 | `viandier` | Le Viandier de Taillevent | ~1300 | Old French | 55 |
 | `buch-guter-speise` | Das Buch von guter Speise | ~1350 | Middle High German | 101 |
-| `corema_n2` | Nürnberg, Germanisches Nationalmuseum, Hs 3227a | ~1389 | Middle High German (East Central German) | 1 |
+| `corema_n2` | Nürnberg, Germanisches Nationalmuseum, Hs 3227a | ~1389 | Middle High German (East Central German) | 15 |
 | `anonimo_toscano` | Anonimo Toscano (Libro della cocina) | ~1390 | Tuscan Volgare | 40 |
 | `form-of-cury` | The Forme of Cury | ~1390 | Middle English | 192 |
 | `menagier` | Ménagier de Paris | 1393 | Old French | 379 |
@@ -126,10 +126,10 @@ No parameters.
 | `muenchner_cgm811` | Münchner Handschrift Cgm 811 | ~1440 | Early New High German (Swabian–Bavarian) | 4 |
 | `corema_ka2` | Haus- und Arzneibuch (Karlsruhe, Cod. Donaueschingen 793) | ~1445 | Early New High German (Bavarian, lower Inn valley) | 56 |
 | `rheinfraenkisches_kochbuch` | Rheinfränkisches Kochbuch | ~1445 | Rhine-Franconian (Middle High German) | 76 |
-| `corema_ka1` | Reichenauer Kochbuch (Karlsruhe, Cod. Aug. pap. 125) | 15th c. | Early New High German (Alemannic) | 75 |
+| `corema_ka1` | Reichenauer Kochbuch (Karlsruhe, Cod. Aug. pap. 125) | 15th c. | Early New High German (Alemannic) | 104 |
 | `hausbuch-donaueschingen-792` | Haus- und Arzneibuch im Codex Donaueschingen 792 | ~1450 | Early New High German (Alemannic, Lake Constance region) | 2 |
-| `corema_b4` | Berlin, Staatsbibliothek, Ms. germ. qu. 1187 | ~1450 | Early New High German (Bavarian) | 159 |
-| `corema_w1` | Vienna, Austrian National Library, Cod. 2897 | ~1450 | Early New High German (Bavarian-Austrian) | 155 |
+| `corema_b4` | Berlin, Staatsbibliothek, Ms. germ. qu. 1187 | ~1450 | Early New High German (Bavarian) | 269 |
+| `corema_w1` | Vienna, Austrian National Library, Cod. 2897 | ~1450 | Early New High German (Bavarian-Austrian) | 234 |
 | `meister_eberhard` | Kochbuch Meister Eberhards | ~1450 | Early New High German (Bavarian) | 23 |
 | `tegernsee` | Tegernseer Speisenbuch | 1453–1534 | Early New High German (Bavarian) | 51 |
 | `meister_hans` | Kochbuch des Meisters Hans (UB Basel, A.N.V. 12) | ~1460 | Early New High German (Alemannic–Swabian) | 289 |
@@ -151,7 +151,7 @@ No parameters.
 | `corema_wo10` | Wolfenbüttel, Herzog-August-Bibliothek, Cod. Guelf. 42.3-5. Aug. 4° | 1543 | Early New High German | 116 |
 | `staindl` | Ein künstlichs vnd nutzlichs Kochbuch (Balthasar Staindl) | 1545 | Early New High German (Swabian/Augsburg) | 294 |
 | `sabina_welserin` | Das Kochbuch der Sabina Welserin | 1553 | Early New High German (East Swabian/Augsburg) | 206 |
-| `stenglerin` | Kochbuch der Maria Stenglerin | 1554 | Early New High German (Swabian/Augsburg) | 55 |
+| `stenglerin` | Kochbuch der Maria Stenglerin | 1554 | Early New High German (Swabian/Augsburg) | 144 |
 | `koch_kellermeisterei` | Koch und Kellermeisterei | 1574 | Early New High German | 110 |
 
 The **Recipes** column above is the number of recipes *currently available* from each source. Note that the `recipe_count` field returned by `list_recipe_sources` reflects each manuscript's *full* recipe count (its total editorial scope) — for sources still being ingested, that figure can be higher than what `search_recipes` returns today. The corpus is reviewed and published source-by-source, so all counts grow over time.
