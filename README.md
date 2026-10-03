@@ -111,7 +111,7 @@ List all available cookbooks with metadata (year, language, region, recipe count
 
 No parameters.
 
-**Sources** (39 active cookbooks, ordered by date):
+**Sources** (40 active cookbooks, ordered by date):
 
 | Key | Title | Year | Language | Recipes |
 |---|---|---|---|---|
@@ -149,11 +149,12 @@ No parameters.
 | `muenchner_cgm5919` | Regensburger Kochbuch (Cgm 5919) | ~1505 | Early New High German (Bavarian) | 104 |
 | `severin` | Kuchařství (Böhmisches Kochbuch) | 1535 | Early Czech | 147 |
 | `corema_wo10` | Wolfenbüttel, Herzog-August-Bibliothek, Cod. Guelf. 42.3-5. Aug. 4° | 1543 | Early New High German | 116 |
+| `philippine_welser` | Das Kochbuch der Philippine Welser | 1543 | Early New High German (East Swabian/Augsburg, Tyrolean-Bavarian additions) | 242 |
 | `staindl` | Ein künstlichs vnd nutzlichs Kochbuch (Balthasar Staindl) | 1545 | Early New High German (Swabian/Augsburg) | 294 |
 | `sabina_welserin` | Das Kochbuch der Sabina Welserin | 1553 | Early New High German (East Swabian/Augsburg) | 206 |
 | `stenglerin` | Kochbuch der Maria Stenglerin | 1554 | Early New High German (Swabian/Augsburg) | 144 |
 | `koch_kellermeisterei` | Koch und Kellermeisterei | 1574 | Early New High German | 110 |
-| `rumpolt` | Ein new Kochbuch (Marx Rumpolt) | 1581 | Early New High German (Frankfurt/Mainz) | 160 |
+| `rumpolt` | Ein new Kochbuch (Marx Rumpolt) | 1581 | Early New High German (Frankfurt/Mainz) | 400 |
 
 The **Recipes** column above is the number of recipes *currently available* from each source. Note that the `recipe_count` field returned by `list_recipe_sources` reflects each manuscript's *full* recipe count (its total editorial scope) — for sources still being ingested, that figure can be higher than what `search_recipes` returns today. The corpus is reviewed and published source-by-source, so all counts grow over time.
 
@@ -188,7 +189,7 @@ Search historical recipes with filtering and ingredient matching.
 | `course` | string | — | See course types below |
 | `difficulty_max` | integer 1–3 | — | 1=easy, 2=medium, 3=advanced |
 | `lagerkueche` | boolean | — | Only recipes suitable for outdoor/camp cooking |
-| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list (39 active sources). |
+| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list (40 active sources). |
 | `dietary` | string | — | `vegetarian` (no meat/fish, eggs/dairy allowed) or `vegan` (no animal products; almond milk and honey accepted by convention). Vegan recipes are also tagged vegetarian, so `vegetarian` includes the vegan ones. Equivalent to `tags=["vegetarisch"]` / `tags=["vegan"]`. |
 | `tags` | string[] | — | Controlled-vocabulary tag filter (AND logic, max 6). Vocabulary: `pasta`, `reis`, `brei`, `beilage`, `huelsenfruechte`, `brot` (dish type); `vegetarisch`, `vegan`, `fastenspeise` (diet); `hofkueche`, `buergerlich`, `bauernkueche` (social class). Call `list_recipe_tags` for descriptions. |
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
