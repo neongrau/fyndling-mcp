@@ -193,10 +193,18 @@ Search historical recipes with filtering and ingredient matching.
 | `tags` | string[] | — | Controlled-vocabulary tag filter (AND logic, max 6). Vocabulary: `pasta`, `reis`, `brei`, `beilage`, `huelsenfruechte`, `brot` (dish type); `vegetarisch`, `vegan`, `fastenspeise` (diet); `hofkueche`, `buergerlich`, `bauernkueche` (social class). Call `list_recipe_tags` for descriptions. |
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
 | `epoch_to` | integer | — | Latest source year (e.g. `1500`) |
-| `ingredients` | string[] | — | Include filter: all listed must be present (partial match, AND logic) |
+| `ingredients` | string[] | — | Include filter: all listed must be present (AND). Case-, umlaut- and ß-folded (`Apfel` finds `Äpfel`); see `ingredient_match`. |
+| `ingredient_qids` | string[] | — | Exact filter by Wikidata QID, e.g. `["Q89"]` = apple (AND). Independent of spelling, language and plural. |
+| `ingredient_match` | `word` \| `substring` | — | `word` (default): term must start a word of the ingredient name (`Apfel` finds `Äpfel`, `Apfelessig`, not `Granatäpfel`). `substring`: anywhere in the name. |
+| `query` | string | — | Free-text search over title and modern text (terms AND-ed, umlaut-folded; title hits first). |
 | `exclude_courses` | string[] | — | Exclude these course types |
-| `exclude_ingredients` | string[] | — | Exclude recipes containing any of these ingredients |
-| `limit` | integer | — | Default 20, max 100 |
+| `exclude_ingredients` | string[] | — | Exclude recipes containing any of these ingredients (same matching as `ingredients`) |
+| `limit` | integer | — | Page size, default 20, max 100 |
+| `offset` | integer | — | Skip this many matches; pass `next_offset` from the previous response |
+| `detail` | `slim` \| `standard` | — | Default `slim`: id, title, course, source, difficulty, lagerküche, prep time, tags. `standard` = full list entry (text, ingredients, annotations, FAQ). |
+| `fields` | string[] | — | Explicit top-level fields to return (overrides `detail`); `id` and `fyndling_url` always included |
+
+**Response (v2):** `total` (all matches), `count` (this page), `offset`, `has_more`, `next_offset`, `recipes`. Results are ordered by id (title hits first with `query`), so check `has_more` on broad searches.
 
 **Course types:**
 
@@ -287,7 +295,7 @@ Search historical recipes with filtering and ingredient matching.
 }
 ```
 
-**Recipe list fields** (full details stripped for list performance): `id`, `source_key`, `title_modern`, `course`, `difficulty`, `serves`, `prep_time_min`, `ingredients`, `lagerküche`, `published_at`, `fyndling_url` (canonical link to the recipe page on fyndling.de)
+**Recipe list fields** (full details stripped for list performance; v2 also drops `applied_delta_ids`, `quality_score_details`, `review_dates` from list results — `get_recipe` still returns everything): `id`, `source_key`, `title_modern`, `course`, `difficulty`, `serves`, `prep_time_min`, `ingredients`, `lagerküche`, `published_at`, `fyndling_url` (canonical link to the recipe page on fyndling.de)
 
 ---
 
