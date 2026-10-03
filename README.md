@@ -195,17 +195,19 @@ Search historical recipes with filtering and ingredient matching.
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
 | `epoch_to` | integer | — | Latest source year (e.g. `1500`) |
 | `ingredients` | string[] | — | Include filter: all listed must be present (AND). Case-, umlaut- and ß-folded (`Apfel` finds `Äpfel`); see `ingredient_match`. |
-| `ingredient_qids` | string[] | — | Exact filter by Wikidata QID, e.g. `["Q89"]` = apple (AND). Independent of spelling, language and plural. |
-| `ingredient_match` | `word` \| `substring` | — | `word` (default): term must start a word of the ingredient name (`Apfel` finds `Äpfel`, `Apfelessig`, not `Granatäpfel`). `substring`: anywhere in the name. |
-| `query` | string | — | Free-text search over title and modern text (terms AND-ed, umlaut-folded; title hits first). |
+| `ingredient_qids` | string[] | — | Exact filter by Wikidata QID, e.g. `["Q89"]` = apple (AND). Independent of spelling, language and plural. Loses hits for ingredients without a QID (see `qid_coverage`). |
+| `ingredient_match` | `word` \| `token` \| `substring` | — | `word` (default): term must start a word of the ingredient name (`Apfel` finds `Äpfel`, `Apfelessig`, not `Granatäpfel`). `token`: term must be a whole word (not `Apfelessig`). `substring`: anywhere (also `Granatäpfel`, `Jakober-Äpfel`). Plain plural stem on the term (`Birnen` = `Birne`). |
+| `query` | string | — | Free-text search (min. 3 chars; terms AND-ed, umlaut-folded). Terms ≤ 4 chars must start a word; longer terms match anywhere (`Torte` finds `Quittentorte`, not `Törtchen`). |
+| `query_in` | array | — | Where `query` looks: `title`, `text`, `transcript`. Default `["title","text"]`. |
+| `sort` | `relevance` \| `quality_score` \| `id` | — | Default `relevance` with `query`, else `id`. Every order tie-breaks on `id`, so paging is stable. |
 | `exclude_courses` | string[] | — | Exclude these course types |
 | `exclude_ingredients` | string[] | — | Exclude recipes containing any of these ingredients (same matching as `ingredients`) |
 | `limit` | integer | — | Page size, default 20, max 100 |
 | `offset` | integer | — | Skip this many matches; pass `next_offset` from the previous response |
 | `detail` | `slim` \| `standard` | — | Default `slim`: id, title, course, source, difficulty, lagerküche, prep time, tags. `standard` = full list entry (text, ingredients, annotations, FAQ). |
-| `fields` | string[] | — | Explicit top-level fields to return (overrides `detail`); `id` and `fyndling_url` always included |
+| `fields` | string[] | — | Whitelisted fields to return (overrides `detail`), e.g. `quality_score`, `serves`, `lagerküche_level`, `matched_ingredients`; `id` and `fyndling_url` always included |
 
-**Response (v2):** `total` (all matches), `count` (this page), `offset`, `has_more`, `next_offset`, `recipes`. Results are ordered by id (title hits first with `query`), so check `has_more` on broad searches.
+**Response:** `total` (all matches), `count` (this page), `offset`, `sort`, `has_more`, `next_offset`, `recipes`. With an ingredient filter each hit carries `matched_ingredients`; with `ingredient_qids` the response adds `qid_coverage` (only ~75% of ingredient lines have a QID — recipes without one are not found by that filter). Results are ordered by id (title hits first with `query`), so check `has_more` on broad searches.
 
 **Course types:**
 
