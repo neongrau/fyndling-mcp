@@ -192,6 +192,8 @@ The response also lists `uncontrolled_tags`: free-form editorial/internal tags t
 
 Tag IDs are German (kebab-style). Pass them verbatim to `search_recipes(tags=[...])`. Multiple tags combine with AND logic — `tags=["hofkueche", "vegetarisch"]` returns only vegetarian dishes that are also tagged as courtly cuisine. Social-class tags can co-occur on a single recipe when a source explicitly addresses multiple classes (classic Bockenheim pattern: *"et erit bonum pro ciuibus Rusticis et nobilibus"* → both `bauernkueche` and `hofkueche`).
 
+**Diet tags and optional ingredients:** the BASE version of a recipe (without optional ingredients) decides the tag. If optional ingredients would break it (e.g. optional meat and eggs in a vegan recipe, optional lard in a vegetarian one), the recipe keeps its tag and carries `dietary_note` ("Basisfassung vegan (ohne optionale Zutaten); optional erweiterbar mit: Eier, Fleisch, Ziegenmilch"), shown automatically when `dietary` or a diet tag is filtered and available via `fields`. "Menge nach Belieben" is an amount, not an optional ingredient.
+
 The `dietary` filter in `search_recipes` is a convenience alias: `dietary="vegetarian"` is equivalent to `tags=["vegetarisch"]`, and `dietary="vegan"` to `tags=["vegan"]`. Note that vegan recipes also carry the `vegetarisch` tag, so `dietary="vegetarian"` returns both groups.
 
 ---
@@ -210,10 +212,10 @@ Search historical recipes with filtering and ingredient matching.
 | `tags` | string[] | — | Controlled-vocabulary tag filter (AND logic, max 6). Vocabulary: `pasta`, `reis`, `brei`, `beilage`, `huelsenfruechte`, `brot` (dish type); `vegetarisch`, `vegan`, `fastenspeise` (diet); `hofkueche`, `buergerlich`, `bauernkueche` (social class). Call `list_recipe_tags` for descriptions. |
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
 | `epoch_to` | integer | — | Latest source year (e.g. `1500`) |
-| `ingredients` | string[] | — | Include filter: all listed must be present (AND). Case-, umlaut- and ß-folded (`Apfel` finds `Äpfel`); bracketed notes such as `Öl (zum Braten der Äpfel)` are ignored; see `ingredient_match`. |
+| `ingredients` | string[] | — | Include filter: all listed must be present (AND). Case-, umlaut- and ß-folded (`Apfel` finds `Äpfel`); bracketed notes such as `Öl (zum Braten der Äpfel)` are ignored, and so are negations (`fleischlose Brühe`, `ohne Fleisch`, `kein Fleisch` do not match `Fleisch` in `word`/`token` mode); see `ingredient_match`. |
 | `ingredient_qids` | string[] | — | Exact filter by Wikidata QID, e.g. `["Q89"]` = apple (AND). Independent of spelling, language and plural. Loses hits for ingredients without a QID (see `qid_coverage`). |
 | `ingredient_match` | `word` \| `token` \| `substring` | — | `word` (default): term must start a word of the ingredient name (`Apfel` finds `Äpfel`, `Apfelessig`, not `Granatäpfel`). `token`: term must be a whole word (not `Apfelessig`). `substring`: anywhere (also `Granatäpfel`, `Jakober-Äpfel`). Plain plural stem on the term (`Birnen` = `Birne`). |
-| `query` | string | — | Free-text search (min. 3 chars; terms AND-ed, umlaut-folded). Terms ≤ 4 chars must start a word; longer terms match anywhere (`Torte` finds `Quittentorte`, not `Törtchen`). |
+| `query` | string | — | Free-text search (min. 3 chars; special characters such as `%`, `_`, `\` are plain punctuation, never wildcards, and a query without any letter or digit matches nothing; terms AND-ed, umlaut-folded). Terms ≤ 4 chars must start a word; longer terms match anywhere (`Torte` finds `Quittentorte`, not `Törtchen`). |
 | `query_in` | array | — | Where `query` looks: `title`, `text`, `ingredients`, `transcript`. Default `["title","text","ingredients"]`. Scoring per term and field, word start beats inside-a-compound: title 100/60, ingredients 30/15, text 10/5, transcript 3/1; ties by `quality_score`, then `id`. |
 | `sort` | `relevance` \| `quality_score` \| `id` | — | Default `relevance` with `query`, else `id`. Relevance: (1) recipes with a title hit first, word-start before inside-a-compound; (2) among recipes without a title hit: ingredient hits before text hits; (3) `quality_score` descending; (4) `id`. Among title hits the order is therefore purely `quality_score`. Every order tie-breaks on `id`, so paging is stable. |
 | `exclude_courses` | string[] | — | Exclude these course types |
@@ -223,7 +225,7 @@ Search historical recipes with filtering and ingredient matching.
 | `dish_role` | string[] | — | Role a recipe plays, independent of `course` (OR): `tortenboden`, `pastetenteig`, `teig_basis`, `fuellung`, `garnitur`, `sauce_basis`, `bruehe_basis`, `gelee_basis`. Values and counts: `list_recipe_tags` → `dish_roles`. |
 | `limit` | integer | — | Page size, default 20, max 100 |
 | `offset` | integer | — | Skip this many matches; pass `next_offset` from the previous response |
-| `detail` | `slim` \| `standard` | — | Default `slim`: id, source_key, source_ref, title_modern, course, lagerküche, difficulty, prep_time_min, fyndling_url. `standard` = full list entry (text, ingredients, annotations, FAQ). |
+| `detail` | `slim` \| `standard` | — | Default `slim`: id, source_key, source_ref, title_modern, course, lagerküche, difficulty, prep_time_min, `tags` (always an array, `[]` if none), fyndling_url. `standard` = full list entry (text, ingredients, annotations, FAQ). |
 | `fields` | string[] | — | Whitelisted fields ADDED to the default (e.g. `quality_score`, `tags`, `score`, `matched_ingredients`, `dish_role`, `relations` = slim `[{id, relation}]`); missing values come back as `null`/`[]`, unknown names are rejected. |
 | `fields_mode` | `add` \| `only` | — | `add` (default) extends the default; `only` returns just `fields` (+ `id`, `fyndling_url`). |
 
