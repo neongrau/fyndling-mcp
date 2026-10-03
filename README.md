@@ -218,10 +218,13 @@ Search historical recipes with filtering and ingredient matching.
 | `sort` | `relevance` \| `quality_score` \| `id` | — | Default `relevance` with `query`, else `id`. Relevance: (1) recipes with a title hit first, word-start before inside-a-compound; (2) among recipes without a title hit: ingredient hits before text hits; (3) `quality_score` descending; (4) `id`. Among title hits the order is therefore purely `quality_score`. Every order tie-breaks on `id`, so paging is stable. |
 | `exclude_courses` | string[] | — | Exclude these course types |
 | `exclude_ingredients` | string[] | — | Exclude recipes containing any of these ingredients (same matching as `ingredients`) |
+| `related_to` | string | — | Recipe id: only recipes related to it (see `get_related`); combines with every other filter. Each hit then carries `relation`, `reason`, `confidence`, `quelle`; default order: strongest relation, then `quality_score`. |
+| `relation` | string[] | — | With `related_to`: restrict to `twin`, `variant`, `alternative_role`, `parallel_other_language`, `similar`, `depends_on` (OR). |
+| `dish_role` | string[] | — | Role a recipe plays, independent of `course` (OR): `tortenboden`, `pastetenteig`, `teig_basis`, `fuellung`, `garnitur`, `sauce_basis`, `bruehe_basis`, `gelee_basis`. Values and counts: `list_recipe_tags` → `dish_roles`. |
 | `limit` | integer | — | Page size, default 20, max 100 |
 | `offset` | integer | — | Skip this many matches; pass `next_offset` from the previous response |
 | `detail` | `slim` \| `standard` | — | Default `slim`: id, source_key, source_ref, title_modern, course, lagerküche, difficulty, prep_time_min, fyndling_url. `standard` = full list entry (text, ingredients, annotations, FAQ). |
-| `fields` | string[] | — | Whitelisted fields ADDED to the default (e.g. `quality_score`, `tags`, `score`, `matched_ingredients`); missing values come back as `null`/`[]`, unknown names are rejected. |
+| `fields` | string[] | — | Whitelisted fields ADDED to the default (e.g. `quality_score`, `tags`, `score`, `matched_ingredients`, `dish_role`, `relations` = slim `[{id, relation}]`); missing values come back as `null`/`[]`, unknown names are rejected. |
 | `fields_mode` | `add` \| `only` | — | `add` (default) extends the default; `only` returns just `fields` (+ `id`, `fyndling_url`). |
 
 **Response:** `total` (all matches), `count` (this page), `offset`, `sort`, `has_more`, `next_offset`, `recipes`. With an ingredient filter each hit carries `matched_ingredients`; with `ingredient_qids` the response adds `qid_coverage` (only ~75% of ingredient lines have a QID — recipes without one are not found by that filter). Results are ordered by id (title hits first with `query`), so check `has_more` on broad searches.
@@ -352,6 +355,22 @@ Get the full details of a single recipe.
   "original_text": "500 g Mandeln"
 }
 ```
+
+---
+
+#### `get_related`
+
+The recipes related to one recipe, with **how** they are related. The recommended way to explore twins, variants and alternatives; `get_recipe` keeps `related_recipes` (plain id list) for compatibility and adds `related` (id, title, relation).
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `id` | string | ✓ | Recipe id, e.g. `wo10-042` |
+| `relation` | string[] | — | Only these types (OR). Default: all |
+| `limit` / `offset` | integer | — | Page size (default 20, max 100) / skip |
+
+**Relation types:** `twin` (same recipe, other transmission), `variant` (same technique, different quantities or ingredients), `alternative_role` (fulfils the same function with another approach, e.g. a different tart base), `parallel_other_language` (same recipe in another language), `similar` (automatic, untyped, from the curated related lists), `depends_on` (directed: "as written above"; entries carry `direction`: `outgoing` = this recipe depends on the listed one, `incoming` = the listed one depends on this recipe). All but `depends_on` are symmetric.
+
+**Entry:** `id`, `title_modern`, `source_key`, `source_ref`, `course`, `difficulty`, `prep_time_min`, `fyndling_url`, `relation`, `reason` (one sentence, taken from the recipe notes where they describe the difference), `confidence` (`high`/`medium`/`low`), `quelle` (`curated` = individually checked against the recipe texts, `auto` = derived in bulk from text references, concordances and related lists; neither is a final human verdict). Order: relation strength, then `quality_score`, then `id`. Same envelope as `search_recipes`. An unknown id is an MCP error.
 
 ---
 
