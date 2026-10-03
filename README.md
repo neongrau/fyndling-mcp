@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 5,800+ markets, concerts, castle experiences, living-history events, and renaissance faires across 26+ countries in Europe and North America, by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — 1,900+ meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 4,650+ recipes from **forty cookbooks** spanning the 13th–16th century, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
+- **Historical recipes** — 4,650+ recipes from **forty cookbooks** spanning c. 1300–1581, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
