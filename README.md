@@ -37,19 +37,32 @@ Add to your MCP client config (e.g. Claude Desktop `claude_desktop_config.json`)
 
 ### Events & Locations
 
+All list tools (`find_events_near`, `list_events`, `find_pois_near`, `search_recipes`) return the same envelope: `total` (all matches), `count`, `offset`, `sort`, `has_more`, `next_offset`, plus the array (`events`, `pois`, `recipes`). Page with `offset`. Orders always tie-break on `id`, so pages never skip or repeat. Errors (unknown id, invalid input) are real MCP errors (`isError`), never normal results.
+
+**Event schema** (fixed; same fields for every source): `id`, `name`, `date_from`, `date_to` (null = single day), `ort`, `plz`, `country`, `lat`, `lon`, `geo_precision`, `venue`, `category`, `categories[]`, `flags[]`, `cancelled`, `source_url`, `fyndling_url`, `description` (excerpt in lists), `extra{}` (source-specific raw fields); optional `band`, `organizers[]`, `duplicate_ids[]`. Searches around a point add `distance_km` and `distance_approximate`.
+
+- `category` is the stored category (`market`, `concert`, `burg_event`, `renfaire`); `categories[]` adds flag-based memberships such as `living_history`. Filters (`category`, `types`) test `categories[]`, so response and filter never disagree.
+- `flags[]` includes `living_history`, `beerenweine`, `free_admission`, `sold_out` and the derived `party` (dance and party nights such as "Bal Renaissance", classified as `market`).
+- `geo_precision` is **derived, not verified**: `venue`, `address`, `plz` or `city`. Coordinates shared by many venues (e.g. one point per city) count as `city`. Imprecise events are shown and marked (`distance_approximate`) but sorted as if up to 5 km (`plz`) or 10 km (`city`) farther away, so they never crowd out precise results.
+- Placeholder texts from scraping are returned as `null`.
+
 #### `find_events_near`
 
-Find medieval events near a geographic coordinate, sorted by distance.
+Find medieval events near a geographic coordinate, sorted by effective distance, then date, then id.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `lat` | number | ✓ | Latitude |
-| `lon` | number | ✓ | Longitude |
+| `lat` | number | ✓ | Latitude, -90 to 90 |
+| `lon` | number | ✓ | Longitude, -180 to 180 |
 | `radius_km` | number | — | Search radius in km (default 50, max 500) |
-| `date_from` | string | — | ISO 8601 start date, e.g. `2026-06-01` |
-| `date_to` | string | — | ISO 8601 end date, e.g. `2026-06-30` |
-| `types` | array | — | `market`, `concert`, `burg_event`, `living_history`, `renfaire` |
-| `limit` | integer | — | Max results (default 20, max 100) |
+| `date_from` | string | — | `YYYY-MM-DD`, a real calendar date. **Default: today (Europe/Berlin)** |
+| `date_to` | string | — | `YYYY-MM-DD`, not before `date_from` |
+| `types` | array | — | `market`, `concert`, `burg_event`, `renfaire`, `living_history` |
+| `limit` / `offset` | integer | — | Page size (default 20, max 100) / skip |
+| `include_cancelled` | boolean | — | Default `false`. Cancelled = DB flag or "abgesagt" in name/description |
+| `dedupe` | boolean | — | Default `true`: hide display duplicates (same category, normalised name, date and place); the kept entry lists `duplicate_ids`. IDs and scraper keys are untouched |
+
+The date filter tests **overlap**: a multi-day event that started before `date_from` and still runs is found. Recurring markets are one entry showing the next date. The response echoes `effective_date_from` and `effective_date_to`. Invalid input (lat 95, `"morgen"`, reversed range) is a validation error.
 
 **Example — markets within 80 km of Vienna this summer:**
 ```json
@@ -61,27 +74,25 @@ Find medieval events near a geographic coordinate, sorted by distance.
 }
 ```
 
-**Response fields:** `id`, `name`, `date_from`, `date_to`, `city`, `country`, `lat`, `lon`, `distance_km`, `category`, `description`, `fyndling_url`
-
 ---
 
 #### `list_events`
 
-List events filtered by category, country, and/or date range.
+List events filtered by category, country, and/or date range, ordered by start date, then id.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `category` | string | — | `market`, `concert`, `burg_event`, `living_history`, `renfaire` |
+| `category` | string | — | `market`, `concert`, `burg_event`, `renfaire`, `living_history` |
 | `country` | string | — | ISO 3166-1 alpha-2 code (e.g. `DE`, `AT`, `FR`, `PL`) |
-| `date_from` | string | — | ISO 8601 |
-| `date_to` | string | — | ISO 8601 |
-| `limit` | integer | — | Default 20, max 100 |
+| `date_from` / `date_to` | string | — | `YYYY-MM-DD`; `date_from` defaults to today (Europe/Berlin) |
+| `limit` / `offset` | integer | — | Page size (default 20, max 100) / skip |
+| `include_cancelled`, `dedupe` | boolean | — | As in `find_events_near` |
 
 ---
 
 #### `get_event`
 
-Get full details for a single event by ID.
+Full details for one event (also accepts POI ids): complete description, `organizers`, `other_dates` (same series nearby), `nearby_events` and `nearby_pois` (up to 5 each within 25 km, upcoming only). An unknown or deleted id is an MCP error.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -91,15 +102,16 @@ Get full details for a single event by ID.
 
 #### `find_pois_near`
 
-Find permanent medieval-themed locations (meaderies, castles, restaurants).
+Find permanent medieval-themed locations, sorted by effective distance, then id.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `lat` | number | ✓ | Latitude |
-| `lon` | number | ✓ | Longitude |
+| `lat` / `lon` | number | ✓ | Coordinates (validated like above) |
 | `radius_km` | number | — | Default 100, max 1000 |
-| `poi_type` | string | — | `meadery`, `metkellerei`, `burg`, `ma_gastronomie` |
-| `limit` | integer | — | Default 20, max 100 |
+| `poi_type` | string | — | `meadery` (mead producer; `metkellerei` and `metkellereien` are accepted aliases), `burg` (castle), `ma_gastronomie` (medieval restaurant; the country is a separate field). Output `poi_type` is always canonical and equals the filter value |
+| `limit` / `offset` | integer | — | Page size (default 20, max 100) / skip |
+
+**POI schema:** `id`, `name`, `poi_type`, `ort`, `plz`, `country`, `state`, `address`, `lat`, `lon`, `geo_precision`, `website`, `website_ok` (`true`/`false` = last link check, `null` = unknown), `collected_at`, `distance_km`, `distance_approximate`, `fyndling_url`, `extra{}` (e.g. `zustand`/`slug` for castles). No event fields.
 
 ---
 
