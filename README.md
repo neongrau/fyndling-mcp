@@ -156,7 +156,7 @@ No parameters.
 | `koch_kellermeisterei` | Koch und Kellermeisterei | 1574 | Early New High German | 110 |
 | `rumpolt` | Ein new Kochbuch (Marx Rumpolt) | 1581 | Early New High German (Frankfurt/Mainz) | 400 |
 
-The **Recipes** column above is the number of recipes *currently available* from each source. Note that the `recipe_count` field returned by `list_recipe_sources` reflects each manuscript's *full* recipe count (its total editorial scope) — for sources still being ingested, that figure can be higher than what `search_recipes` returns today. The corpus is reviewed and published source-by-source, so all counts grow over time.
+The **Recipes** column above is the number of recipes *currently available* from each source. `list_recipe_sources` returns two figures per source: `recipe_count` (imported and searchable now) and `recipe_count_original` (recipes in the manuscript or edition, `null` if unknown). Descriptions may quote the original figure, so the two legitimately differ for sources still being ingested. The corpus is reviewed and published source-by-source, so all counts grow over time.
 
 ---
 
@@ -173,6 +173,10 @@ No parameters.
 | `dish_type` | `pasta`, `reis`, `brei`, `beilage`, `huelsenfruechte`, `brot` |
 | `diet` | `vegetarisch`, `vegan`, `fastenspeise` |
 | `social_class` | `hofkueche`, `buergerlich`, `bauernkueche` |
+| `beverage` | `met`, `methiglyn`, `bochet`, `melomel`, `hippocras` |
+| `occasion` | `festtag`, `schauspeise` |
+
+The response also lists `uncontrolled_tags`: free-form editorial/internal tags that exist on recipes but are not valid `tags` filter values.
 
 Tag IDs are German (kebab-style). Pass them verbatim to `search_recipes(tags=[...])`. Multiple tags combine with AND logic — `tags=["hofkueche", "vegetarisch"]` returns only vegetarian dishes that are also tagged as courtly cuisine. Social-class tags can co-occur on a single recipe when a source explicitly addresses multiple classes (classic Bockenheim pattern: *"et erit bonum pro ciuibus Rusticis et nobilibus"* → both `bauernkueche` and `hofkueche`).
 
@@ -199,7 +203,7 @@ Search historical recipes with filtering and ingredient matching.
 | `ingredient_match` | `word` \| `token` \| `substring` | — | `word` (default): term must start a word of the ingredient name (`Apfel` finds `Äpfel`, `Apfelessig`, not `Granatäpfel`). `token`: term must be a whole word (not `Apfelessig`). `substring`: anywhere (also `Granatäpfel`, `Jakober-Äpfel`). Plain plural stem on the term (`Birnen` = `Birne`). |
 | `query` | string | — | Free-text search (min. 3 chars; terms AND-ed, umlaut-folded). Terms ≤ 4 chars must start a word; longer terms match anywhere (`Torte` finds `Quittentorte`, not `Törtchen`). |
 | `query_in` | array | — | Where `query` looks: `title`, `text`, `ingredients`, `transcript`. Default `["title","text","ingredients"]`. Scoring per term and field, word start beats inside-a-compound: title 100/60, ingredients 30/15, text 10/5, transcript 3/1; ties by `quality_score`, then `id`. |
-| `sort` | `relevance` \| `quality_score` \| `id` | — | Default `relevance` with `query`, else `id`. Every order tie-breaks on `id`, so paging is stable. |
+| `sort` | `relevance` \| `quality_score` \| `id` | — | Default `relevance` with `query`, else `id`. Relevance: (1) recipes with a title hit first, word-start before inside-a-compound; (2) among recipes without a title hit: ingredient hits before text hits; (3) `quality_score` descending; (4) `id`. Among title hits the order is therefore purely `quality_score`. Every order tie-breaks on `id`, so paging is stable. |
 | `exclude_courses` | string[] | — | Exclude these course types |
 | `exclude_ingredients` | string[] | — | Exclude recipes containing any of these ingredients (same matching as `ingredients`) |
 | `limit` | integer | — | Page size, default 20, max 100 |
@@ -222,13 +226,16 @@ Search historical recipes with filtering and ingredient matching.
 | `main_fish` | Fish mains |
 | `main_other` | Other mains |
 | `main_vegetarian` | Vegetarian mains |
-| `main` | **Alias** — all mains combined (meat + fish + other + vegetarian) |
-| `main_meat` | **Alias** — all meat mains (no fish) |
+| `main_side` | Side-dish mains |
+| `main_meat` | Meat mains whose animal is unspecified (mutton, lamb, offal, mixed) — **and** the alias for all meat mains, see below |
+| `main` | **Alias** — every main course (beef, pork, poultry, game, meat, fish, vegetarian, side, other) |
 | `side` | Side dishes |
 | `dessert` | Desserts / sweet dishes |
-| `drink` / `beverage` | Beverages (`beverage` is an alias for `drink`) |
+| `drink` / `beverage` | Beverages (`beverage` is an alias for `drink`; `cellar` craft is not a drink) |
 | `condiment` | Sauces, spice pastes |
 | `other` | Miscellaneous |
+
+`main_meat` is deliberately both a stored value and an alias: unspecified meat is meat, so `course=main_meat` returns every meat main (beef, pork, poultry, game and the unspecified ones) — never vegetarian or fish. `beverage` does not include `cellar`.
 
 **Example — desserts with cinnamon and ginger:**
 ```json
@@ -338,12 +345,13 @@ Get the full details of a single recipe.
 
 #### `compose_menu`
 
-Compose a multi-course menu from historical recipes. Automatically minimises ingredient overlap between courses.
+Compose a multi-course menu from historical recipes, one recipe per course. Per course the pick is: least ingredient overlap with the courses chosen so far, then a cookbook not yet used in the menu (menus mix sources when quality allows), then highest `quality_score`. Candidates are the 200 best-reviewed matches per course.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `courses` | string[] | ✓ | Ordered course list, 1–6 entries (use course type values from above) |
-| `persons` | integer | — | Number of persons (informational, included in output) |
+| `persons` | integer | — | Number of persons. **Echo only** — amounts are not scaled. |
+| `detail` | `slim` \| `standard` | — | Default `slim` (id, title, course, source, difficulty, prep time, quality_score, URL; ~400 tokens for 3 courses). `standard` returns the full entries (~8k tokens per course). |
 | `max_difficulty` | integer 1–3 | — | Maximum difficulty for any course |
 | `lagerkueche` | boolean | — | Only camp-cooking-suitable recipes |
 | `dietary` | string | — | `vegetarian` or `vegan` — applied to every course (vegan recipes are also tagged vegetarian) |
