@@ -221,6 +221,7 @@ Search historical recipes with filtering and ingredient matching.
 | `exclude_courses` | string[] | — | Exclude these course types |
 | `exclude_ingredients` | string[] | — | Exclude recipes containing any of these ingredients (same matching as `ingredients`) |
 | `related_to` | string | — | Recipe id: only recipes related to it (see `get_related`); combines with every other filter. Each hit then carries `relation`, `reason`, `confidence`, `quelle`; default order: strongest relation, then `quality_score`. |
+| `include_low_confidence` | boolean | — | With `related_to`: also auto-derived relations with `confidence: low` (hidden by default; `similar` is hidden unless asked via `relation`) |
 | `relation` | string[] | — | With `related_to`: restrict to `twin`, `variant`, `alternative_role`, `parallel_other_language`, `similar`, `depends_on` (OR). |
 | `dish_role` | string[] | — | Role a recipe plays, independent of `course` (OR): `tortenboden`, `pastetenteig`, `teig_basis`, `fuellung`, `garnitur`, `sauce_basis`, `bruehe_basis`, `gelee_basis`. Values and counts: `list_recipe_tags` → `dish_roles`. |
 | `limit` | integer | — | Page size, default 20, max 100 |
@@ -367,12 +368,14 @@ The recipes related to one recipe, with **how** they are related. The recommende
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `id` | string | ✓ | Recipe id, e.g. `wo10-042` |
-| `relation` | string[] | — | Only these types (OR). Default: all |
+| `relation` | string[] | — | Only these types (OR). **Default: all except `similar`** (ask with `relation: ["similar"]`) |
+| `include_low_confidence` | boolean | — | Default `false`: auto-derived relations with `confidence: low` are hidden (mostly text-formula matches); curated relations always show |
+| `detail` | `slim` \| `standard` | — | Default `slim`: no `reason`, no `fyndling_url` (page of any id: `https://fyndling.de/rezepte/<id>/`), ~70 tokens per entry. `standard` adds `fyndling_url`, `source_ref` and the full `reason` |
 | `limit` / `offset` | integer | — | Page size (default 20, max 100) / skip |
 
 **Relation types:** `twin` (same recipe, other transmission), `variant` (same technique, different quantities or ingredients), `alternative_role` (fulfils the same function with another approach, e.g. a different tart base), `parallel_other_language` (same recipe in another language), `similar` (automatic, untyped, from the curated related lists), `depends_on` (directed: "as written above"; entries carry `direction`: `outgoing` = this recipe depends on the listed one, `incoming` = the listed one depends on this recipe). All but `depends_on` are symmetric.
 
-**Entry:** `id`, `title_modern`, `source_key`, `source_ref`, `course`, `difficulty`, `prep_time_min`, `fyndling_url`, `relation`, `reason` (one sentence, taken from the recipe notes where they describe the difference), `confidence` (`high`/`medium`/`low`), `quelle` (`curated` = individually checked against the recipe texts, `auto` = derived in bulk from text references, concordances and related lists; neither is a final human verdict). Order: relation strength, then `quality_score`, then `id`. Same envelope as `search_recipes`. An unknown id is an MCP error.
+**Entry (slim):** `id`, `title_modern`, `source_key`, `course`, `difficulty`, `prep_time_min`, `relation`, `confidence`, `quelle`, `direction` (only `depends_on`); `standard` adds `fyndling_url`, `source_ref` and `reason` (one sentence, taken from the recipe notes where they describe the difference). Details on `confidence` (`high`/`medium`/`low`), `quelle` (`curated` = individually checked against the recipe texts, `auto` = derived in bulk from text references, concordances and related lists; neither is a final human verdict). Order: relation strength, then `quality_score`, then `id`. A recipe appears once per relation type; a pair carries two relations only if both are curated and say different things (e.g. `wo10-044` is a `variant` of `wo10-042` and `depends_on` it). `total` counts exactly the entries you can page through. Same envelope as `search_recipes`. An unknown id is an MCP error.
 
 ---
 
