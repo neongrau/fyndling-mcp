@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 5,800+ markets, concerts, castle experiences, living-history events, and renaissance faires across 26+ countries in Europe and North America, by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — 1,900+ meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 4,650+ recipes from **forty cookbooks** spanning c. 1300–1581, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
+- **Historical recipes** — 6,350+ recipes from **forty-one cookbooks** spanning c. 1300–1598, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -123,7 +123,7 @@ List all available cookbooks with metadata (year, language, region, recipe count
 
 No parameters.
 
-**Sources** (40 active cookbooks, ordered by date):
+**Sources** (41 active cookbooks, ordered by date):
 
 | Key | Title | Year | Language | Recipes |
 |---|---|---|---|---|
@@ -141,7 +141,7 @@ No parameters.
 | `corema_ka1` | Reichenauer Kochbuch (Karlsruhe, Cod. Aug. pap. 125) | 15th c. | Early New High German (Alemannic) | 104 |
 | `hausbuch-donaueschingen-792` | Haus- und Arzneibuch im Codex Donaueschingen 792 | ~1450 | Early New High German (Alemannic, Lake Constance region) | 2 |
 | `corema_b4` | Berlin, Staatsbibliothek, Ms. germ. qu. 1187 | ~1450 | Early New High German (Bavarian) | 269 |
-| `corema_w1` | Vienna, Austrian National Library, Cod. 2897 | ~1450 | Early New High German (Bavarian-Austrian) | 234 |
+| `corema_w1` | Vienna, Austrian National Library, Cod. 2897 | ~1450 | Early New High German (Bavarian-Austrian) | 269 |
 | `meister_eberhard` | Kochbuch Meister Eberhards | ~1450 | Early New High German (Bavarian) | 23 |
 | `tegernsee` | Tegernseer Speisenbuch | 1453–1534 | Early New High German (Bavarian) | 51 |
 | `meister_hans` | Kochbuch des Meisters Hans (UB Basel, A.N.V. 12) | ~1460 | Early New High German (Alemannic–Swabian) | 289 |
@@ -164,9 +164,10 @@ No parameters.
 | `philippine_welser` | Das Kochbuch der Philippine Welser | 1543 | Early New High German (East Swabian/Augsburg, Tyrolean-Bavarian additions) | 242 |
 | `staindl` | Ein künstlichs vnd nutzlichs Kochbuch (Balthasar Staindl) | 1545 | Early New High German (Swabian/Augsburg) | 294 |
 | `sabina_welserin` | Das Kochbuch der Sabina Welserin | 1553 | Early New High German (East Swabian/Augsburg) | 206 |
-| `stenglerin` | Kochbuch der Maria Stenglerin | 1554 | Early New High German (Swabian/Augsburg) | 144 |
+| `stenglerin` | Kochbuch der Maria Stenglerin | 1554 | Early New High German (Swabian/Augsburg) | 145 |
 | `koch_kellermeisterei` | Koch und Kellermeisterei | 1574 | Early New High German | 110 |
-| `rumpolt` | Ein new Kochbuch (Marx Rumpolt) | 1581 | Early New High German (Frankfurt/Mainz) | 400 |
+| `rumpolt` | Ein new Kochbuch (Marx Rumpolt) | 1581 | Early New High German (Frankfurt/Mainz) | 2028 |
+| `wecker` | Ein köstlich new Kochbuch (Anna Wecker) | 1598 | Early New High German (Upper German, Amberg/Upper Palatinate) | 50 |
 
 The **Recipes** column above is the number of recipes *currently available* from each source. `list_recipe_sources` returns two figures per source: `recipe_count` (imported and searchable now) and `recipe_count_original` (recipes in the manuscript or edition, `null` if unknown). Descriptions may quote the original figure, so the two legitimately differ for sources still being ingested. The corpus is reviewed and published source-by-source, so all counts grow over time.
 
@@ -207,7 +208,7 @@ Search historical recipes with filtering and ingredient matching.
 | `course` | string | — | See course types below |
 | `difficulty_max` | integer 1–3 | — | 1=easy, 2=medium, 3=advanced |
 | `lagerkueche` | boolean | — | Only recipes suitable for outdoor/camp cooking |
-| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list (40 active sources). |
+| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list (41 active sources). |
 | `dietary` | string | — | `vegetarian` (no meat/fish, eggs/dairy allowed) or `vegan` (no animal products; almond milk and honey accepted by convention). Vegan recipes are also tagged vegetarian, so `vegetarian` includes the vegan ones. Equivalent to `tags=["vegetarisch"]` / `tags=["vegan"]`. |
 | `tags` | string[] | — | Controlled-vocabulary tag filter (AND logic, max 6). Vocabulary: `pasta`, `reis`, `brei`, `beilage`, `huelsenfruechte`, `brot` (dish type); `vegetarisch`, `vegan`, `fastenspeise` (diet); `hofkueche`, `buergerlich`, `bauernkueche` (social class). Call `list_recipe_tags` for descriptions. |
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
