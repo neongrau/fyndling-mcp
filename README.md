@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 8,900+ markets, concerts, castle experiences, living-history events, and renaissance faires across 27 countries in Europe and North America, by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — 1,900+ meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 8,000+ recipes from **fifty sources** (cookbooks, cellar books and bee-keeping treatises) spanning c. 1300–1682, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
+- **Historical recipes** — 8,400+ recipes from **fifty-four sources** (cookbooks, cellar books and bee-keeping treatises) spanning c. 1300–1695, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -123,7 +123,7 @@ List all available cookbooks with metadata (year, language, region, recipe count
 
 No parameters.
 
-**Sources** (50 active sources, ordered by date):
+**Sources** (54 active sources, ordered by date):
 
 | Key | Title | Year | Language | Recipes |
 |---|---|---|---|---|
@@ -146,15 +146,16 @@ No parameters.
 | `tegernsee` | Tegernseer Speisenbuch | 1453–1534 | Early New High German (Bavarian) | 51 |
 | `meister_hans` | Kochbuch des Meisters Hans (UB Basel, A.N.V. 12) | ~1460 | Early New High German (Alemannic–Swabian) | 289 |
 | `muenchner_clm15632` | Klosterkochbuch Rott am Inn (Clm 15632) | 1458/1464 | Early New High German (Bavarian) | 55 |
+| `sbm33` | Salzburg, UB, Cod. M III 3 („Speyerer Kompendium“): Lautertränke und Bierbrauen | ~1460 | Early New High German (Rhine-Franconian, Speyer) | 13 |
 | `martino` | Libro de Arte Coquinaria | ~1465 | Early Italian | 268 |
 | `koenigsberger_kochbuch` | Königsberger Kochbuch (Deutschordensarchiv) | 15th c. | Early New High German (Bavarian / East-Central) | 34 |
 | `muenchner_cgm384` | Münchner Handschrift Cgm 384 | ~1470 | Early New High German (Alemannic) | 83 |
-| `corema_k1` | Kölner Küchenmeisterei (Historisches Archiv der Stadt Köln, Best. 7004, 27) | 15th–16th c. (disputed) | Early New High German (Ripuarian/West-Central German) | 24 |
+| `corema_k1` | Kölner Küchenmeisterei (Historisches Archiv der Stadt Köln, Best. 7004, 27) | 15th–16th c. (disputed) | Early New High German (Ripuarian/West-Central German) | 182 |
 | `edelike_spijse` | Von guten und edlen Speisen (Wel ende edelike spijse) | ~1475 | Middle Dutch | 62 |
 | `muenchner_cgm467` | Hausbuch aus Dietramszell (Cgm 467) | ~1477 | Early New High German (Bavarian) | 3 |
 | `mondseer_kochbuch` | Mondseer Kochbuch (Graz, UB Ms. 1609) | ~1480 | Early New High German (Bavarian–Austrian) | 268 |
 | `muenchner_cgm725` | Münchner Handschrift Cgm 725 | late 15th c. | Early New High German (Bavarian) | 22 |
-| `corema_so1` | Solothurner Küchenmeisterei (Zentralbibliothek Solothurn, Cod. S 490) | ~1487 | Early New High German (Alemannic) | 26 |
+| `corema_so1` | Solothurner Küchenmeisterei (Zentralbibliothek Solothurn, Cod. S 490) | ~1487 | Early New High German (Alemannic) | 81 |
 | `corema_n1` | Alemannisches Büchlein von guter Speise | 1492–1494 | Early New High German (Swabian) | 26 |
 | `weinbuch-donaueschingen` | Weinbuch im Codex Donaueschingen | ~1500 | Early New High German (South Rhine-Franconian) | 28 |
 | `muenchner_cgm349` | Münchner Handschrift Cgm 349 | 16th c. (addendum) | Early New High German (Bavarian) | 4 |
@@ -165,18 +166,21 @@ No parameters.
 | `staindl` | Ein künstlichs vnd nutzlichs Kochbuch (Balthasar Staindl) | 1545 | Early New High German (Swabian/Augsburg) | 294 |
 | `sabina_welserin` | Das Kochbuch der Sabina Welserin | 1553 | Early New High German (East Swabian/Augsburg) | 206 |
 | `stenglerin` | Kochbuch der Maria Stenglerin | 1554 | Early New High German (Swabian/Augsburg) | 145 |
+| `ryff` | Confect oder Latwergen büchlin (Walther Hermann Ryff) | 1562 | Early New High German (Strasbourg) | 50 |
 | `koch_kellermeisterei` | Koch und Kellermeisterei | 1574 | Early New High German | 110 |
 | `rasch` | Weinbuch (Johann Rasch) | ~1580 | Early New High German (Bavarian-Austrian, Vienna/Munich) | 147 |
 | `rumpolt` | Ein new Kochbuch (Marx Rumpolt) | 1581 | Early New High German (Frankfurt/Mainz) | 2028 |
 | `clutius` | Van de Byen, Book 3: Vanden Honich (Theodorus Clutius) | 1597 | Early Modern Dutch (Leiden) | 44 |
 | `wecker` | Ein köstlich new Kochbuch (Anna Wecker) | 1598 | Early New High German (Upper German, Amberg/Upper Palatinate) | 483 |
-| `rontzier` | Kunstbuch von mancherley Essen (Frantz de Rontzier) | 1598 | Early New High German (Brunswick printing language, Wolfenbüttel) | 726 |
+| `rontzier` | Kunstbuch von mancherley Essen (Frantz de Rontzier) | 1598 | Early New High German (Brunswick printing language, Wolfenbüttel) | 806 |
 | `folger_longe` | Receipt book of Sarah Longe (Folger MS V.a.425) | 17th c. | Early Modern English (household manuscript, later hands to the 18th c.) | 141 |
 | `butler` | The Feminine Monarchie, ch. 10 (Charles Butler) | 1623 | Early Modern English (London) | 18 |
+| `royer` | Garden produce in the kitchen (Johann Royer, Hessem garden) | 1648 | Early New High German (Halberstadt) | 20 |
 | `glauber` | Reicher Schatz- und Sammelkasten, 2nd Centuria (Johann Rudolph Glauber) | 1660 | Early New High German (printed in Amsterdam) | 6 |
 | `digby` | The Closet of Sir Kenelme Digbie Opened | 1669 | Early Modern English (London) | 105 |
 | `worlidge` | Vinetum Britannicum (John Worlidge) | 1676 | Early Modern English (London) | 33 |
 | `hohberg` | Georgica Curiosa, ch. „Vom Meth-sieden“ (Wolf Helmhard von Hohberg) | 1682 | Early New High German (Bavarian-Austrian, printed in Nuremberg) | 5 |
+| `hermann` | Lieffländischer Landman, ch. „Vom Mäht-Brauen“ (Johann Hermann von Neidenburg) | 1695 | Late 17th-c. German (Baltic German, Riga) | 2 |
 
 The **Recipes** column above is the number of recipes *currently available* from each source. `list_recipe_sources` returns two figures per source: `recipe_count` (imported and searchable now) and `recipe_count_original` (recipes in the manuscript or edition, `null` if unknown). Descriptions may quote the original figure, so the two legitimately differ for sources still being ingested. The corpus is reviewed and published source-by-source, so all counts grow over time.
 
@@ -439,7 +443,7 @@ Compose a multi-course menu from historical recipes, one recipe per course. Per 
 
 **Events:** Germany, Austria, Switzerland, France, Poland, Czech Republic, Italy, Spain, Portugal, UK, Ireland, Belgium, Netherlands, Luxembourg, Denmark, Sweden, Norway, Finland, Estonia, Lithuania, and more — plus renaissance faires in the United States, Canada, Mexico, and beyond.
 
-**Recipes:** Fifty sources spanning Old Danish, Old French, Middle High German, Middle English, Tuscan Volgare, Medieval Latin, Middle Dutch, Early New High German (Bavarian, Alemannic–Swabian, Rhine-Franconian, Ripuarian), Early Italian, Early Czech, Early Modern Dutch and Early Modern English — from Copenhagen, Paris, London, Würzburg, Florence, the papal court at Rome, Ghent, Cologne, Solothurn, the Upper Rhine, northern Italy, Prague, Frankfurt-am-Main, and a dense cluster of South-German manuscripts: Munich (BSB Cgm 384, 467, 725, 811, 5919, Cgm 349, Clm 15632), Tegernsee, Rott am Inn, Dietramszell, Regensburg, the Reichenau/Lake Constance region (Karlsruhe, Cod. Aug. pap. 125), the lower Inn valley (Karlsruhe, Cod. Donaueschingen 793), and the Teutonic-Order Königsberg fragment; later printed cookbooks, cellar and bee books from Vienna, Wolfenbüttel, Leiden, London, Amsterdam and Nuremberg. Covering c. 1300 to 1682.
+**Recipes:** Fifty-four sources spanning Old Danish, Old French, Middle High German, Middle English, Tuscan Volgare, Medieval Latin, Middle Dutch, Early New High German (Bavarian, Alemannic–Swabian, Rhine-Franconian, Ripuarian), Early Italian, Early Czech, Early Modern Dutch and Early Modern English — from Copenhagen, Paris, London, Würzburg, Florence, the papal court at Rome, Ghent, Cologne, Solothurn, Speyer, the Upper Rhine, northern Italy, Prague, Frankfurt-am-Main, and a dense cluster of South-German manuscripts: Munich (BSB Cgm 384, 467, 725, 811, 5919, Cgm 349, Clm 15632), Tegernsee, Rott am Inn, Dietramszell, Regensburg, the Reichenau/Lake Constance region (Karlsruhe, Cod. Aug. pap. 125), the lower Inn valley (Karlsruhe, Cod. Donaueschingen 793), and the Teutonic-Order Königsberg fragment; later printed cookbooks, cellar and bee books from Vienna, Strasbourg, Wolfenbüttel, Leiden, London, Halberstadt, Amsterdam, Nuremberg and Riga. Covering c. 1300 to 1695.
 
 Notable sources: The Harpestreng manuscript (NKS 66, ~1300) is the earliest surviving cookbook from northern Europe. Le Viandier de Taillevent (~1300) is one of the most influential French court cookbooks of the Middle Ages. The Registrum Coquine of Johannes von Bockenheim (~1433, BnF Ms. Latin 7054) is a Latin compilation from the papal court of Martin V that explicitly labels recipes by social class — "pro magnatibus", "pro communibus", "pro rusticis". The Ghent manuscript (BHSL.HS.1035, ~1475) is the only fully preserved Middle Dutch recipe collection of its era. The Tegernseer Speisenbuch (BSB Cgm 8137, 1453–1534) documents Benedictine monastery cuisine from Bavaria and contains the oldest known written record of the name *Rutschart* (today's *Ritschert*). The South-German manuscript cluster (Munich/Regensburg/Tegernsee) makes Fyndling one of the largest structured digital corpora of 15th–16th-century German cookbook recipes.
 
