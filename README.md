@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 8,900+ markets, concerts, castle experiences, living-history events, and renaissance faires across 27 countries in Europe and North America, by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — 1,900+ meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 9,600+ recipes from **sixty-two sources** (cookbooks, cellar books, bee-keeping treatises and a herbal) spanning c. 1300–1695, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
+- **Historical recipes** — 9,600+ recipes from **sixty-three sources** (cookbooks, cellar books, bee-keeping treatises and a herbal) spanning c. 1300–1695, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -123,7 +123,7 @@ List all available cookbooks with metadata (year, language, region, recipe count
 
 No parameters.
 
-**Sources** (62 active sources, ordered by date):
+**Sources** (63 active sources, ordered by date):
 
 | Key | Title | Year | Language | Recipes |
 |---|---|---|---|---|
@@ -169,6 +169,7 @@ No parameters.
 | `staindl` | Ein künstlichs vnd nutzlichs Kochbuch (Balthasar Staindl) | 1545 | Early New High German (Swabian/Augsburg) | 294 |
 | `sabina_welserin` | Das Kochbuch der Sabina Welserin | 1553 | Early New High German (East Swabian/Augsburg) | 206 |
 | `stenglerin` | Kochbuch der Maria Stenglerin | 1554 | Early New High German (Swabian/Augsburg) | 145 |
+| `olaus` | Historia de gentibus septentrionalibus, Book XIII: bread, mead, beer (Olaus Magnus) | 1555 | Humanist Latin (Rome; subject Scandinavia, Poland, Lithuania) | 13 |
 | `churer_kochbuch` | Churer Kochbuch (Chur, Staatsarchiv Graubünden, NH.2) | 1559–17th c. | Early New High German (Bavarian-Tyrolean core, later Alemannic hands in Chur) | 523 |
 | `ryff` | Confect oder Latwergen büchlin (Walther Hermann Ryff) | 1562 | Early New High German (Strasbourg) | 50 |
 | `wirsung` | Artzney Buch (Christoph Wirsung), mead and honey drinks | 1568 | Early New High German (Heidelberg) | 5 |
@@ -229,7 +230,7 @@ Search historical recipes with filtering and ingredient matching.
 | `course` | string | — | See course types below |
 | `difficulty_max` | integer 1–3 | — | 1=easy, 2=medium, 3=advanced |
 | `lagerkueche` | boolean | — | Only recipes suitable for outdoor/camp cooking |
-| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list (62 active sources). |
+| `source_key` | string | — | Filter by cookbook key. Call `list_recipe_sources` for the full list (63 active sources). |
 | `dietary` | string | — | `vegetarian` (no meat/fish, eggs/dairy allowed) or `vegan` (no animal products; almond milk and honey accepted by convention). Vegan recipes are also tagged vegetarian, so `vegetarian` includes the vegan ones. Equivalent to `tags=["vegetarisch"]` / `tags=["vegan"]`. |
 | `tags` | string[] | — | Controlled-vocabulary tag filter (AND logic, max 6). Vocabulary: `pasta`, `reis`, `brei`, `beilage`, `huelsenfruechte`, `brot` (dish type); `vegetarisch`, `vegan`, `fastenspeise` (diet); `hofkueche`, `buergerlich`, `bauernkueche` (social class). Call `list_recipe_tags` for descriptions. |
 | `epoch_from` | integer | — | Earliest source year (e.g. `1300`) |
@@ -451,7 +452,7 @@ Compose a multi-course menu from historical recipes, one recipe per course. Per 
 
 **Events:** Germany, Austria, Switzerland, France, Poland, Czech Republic, Italy, Spain, Portugal, UK, Ireland, Belgium, Netherlands, Luxembourg, Denmark, Sweden, Norway, Finland, Estonia, Lithuania, and more — plus renaissance faires in the United States, Canada, Mexico, and beyond.
 
-**Recipes:** Sixty-two sources spanning Old Danish, Old French, Middle High German, Middle English, Tuscan Volgare, Medieval Latin, Middle Dutch, Early New High German (Bavarian, Alemannic–Swabian, Rhine-Franconian, Ripuarian), Early Italian, Early Czech, Early Modern Dutch, Early Modern English and Middle Polish — from Copenhagen, Paris, London, Würzburg, Florence, the papal court at Rome, Ghent, Cologne, Solothurn, Chur, Speyer, the Upper Rhine, northern Italy, Prague, Frankfurt-am-Main, and a dense cluster of South-German manuscripts: Michaelbeuern (Salzburg), Munich (BSB Cgm 384, 467, 725, 811, 5919, Cgm 349, Clm 15632), Tegernsee, Rott am Inn, Dietramszell, Regensburg, the Reichenau/Lake Constance region (Karlsruhe, Cod. Aug. pap. 125), the lower Inn valley (Karlsruhe, Cod. Donaueschingen 793), and the Teutonic-Order Königsberg fragment; later printed cookbooks, cellar and bee books from Vienna, Strasbourg, Heidelberg, Wolfenbüttel, Leiden, London, Kraków, Halberstadt, Amsterdam, Nuremberg and Riga. Covering c. 1300 to 1695.
+**Recipes:** Sixty-three sources spanning Old Danish, Old French, Middle High German, Middle English, Tuscan Volgare, Medieval Latin, Humanist Latin, Middle Dutch, Early New High German (Bavarian, Alemannic–Swabian, Rhine-Franconian, Ripuarian), Early Italian, Early Czech, Early Modern Dutch, Early Modern English and Middle Polish — from Copenhagen, Paris, London, Würzburg, Florence, the papal court at Rome, Ghent, Cologne, Solothurn, Chur, Speyer, the Upper Rhine, northern Italy, Prague, Frankfurt-am-Main, and a dense cluster of South-German manuscripts: Michaelbeuern (Salzburg), Munich (BSB Cgm 384, 467, 725, 811, 5919, Cgm 349, Clm 15632), Tegernsee, Rott am Inn, Dietramszell, Regensburg, the Reichenau/Lake Constance region (Karlsruhe, Cod. Aug. pap. 125), the lower Inn valley (Karlsruhe, Cod. Donaueschingen 793), and the Teutonic-Order Königsberg fragment; later printed cookbooks, cellar and bee books from Vienna, Strasbourg, Heidelberg, Wolfenbüttel, Leiden, London, Kraków, Halberstadt, Amsterdam, Nuremberg and Riga. Covering c. 1300 to 1695.
 
 Notable sources: The Harpestreng manuscript (NKS 66, ~1300) is the earliest surviving cookbook from northern Europe. Le Viandier de Taillevent (~1300) is one of the most influential French court cookbooks of the Middle Ages. The Registrum Coquine of Johannes von Bockenheim (~1433, BnF Ms. Latin 7054) is a Latin compilation from the papal court of Martin V that explicitly labels recipes by social class — "pro magnatibus", "pro communibus", "pro rusticis". The Ghent manuscript (BHSL.HS.1035, ~1475) is the only fully preserved Middle Dutch recipe collection of its era. The Tegernseer Speisenbuch (BSB Cgm 8137, 1453–1534) documents Benedictine monastery cuisine from Bavaria and contains the oldest known written record of the name *Rutschart* (today's *Ritschert*). The South-German manuscript cluster (Munich/Regensburg/Tegernsee) makes Fyndling one of the largest structured digital corpora of 15th–16th-century German cookbook recipes.
 
