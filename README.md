@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 8,900+ markets, concerts, castle experiences, living-history events, and renaissance faires across 27 countries in Europe and North America, by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — 1,900+ meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 9,600+ recipes from **sixty-four sources** (cookbooks, cellar books, bee-keeping treatises and a herbal) spanning c. 1300–1695, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
+- **Historical recipes** — 9,700+ recipes from **sixty-four sources** (cookbooks, cellar books, bee-keeping treatises and a herbal) spanning c. 1300–1695, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -178,7 +178,7 @@ No parameters.
 | `rumpolt` | Ein new Kochbuch (Marx Rumpolt) | 1581 | Early New High German (Frankfurt/Mainz) | 2028 |
 | `clutius` | Van de Byen, Book 3: Vanden Honich (Theodorus Clutius) | 1597 | Early Modern Dutch (Leiden) | 44 |
 | `wecker` | Ein köstlich new Kochbuch (Anna Wecker) | 1598 | Early New High German (Upper German, Amberg/Upper Palatinate) | 483 |
-| `rontzier` | Kunstbuch von mancherley Essen (Frantz de Rontzier) | 1598 | Early New High German (Brunswick printing language, Wolfenbüttel) | 1362 |
+| `rontzier` | Kunstbuch von mancherley Essen (Frantz de Rontzier) | 1598 | Early New High German (Brunswick printing language, Wolfenbüttel) | 1453 |
 | `folger_longe` | Receipt book of Sarah Longe (Folger MS V.a.425) | 17th c. | Early Modern English (household manuscript, later hands to the 18th c.) | 141 |
 | `syreniusz` | Zielnik herbarzem (Szymon Syreński / Syreniusz), barley mead | 1613 | Middle Polish (Kraków) | 1 |
 | `mleczko` | Household convolute of Mikołaj Mleczko (Chołopienicze): mead, brandy and beer | ~1630 | Middle Polish (Grand Duchy of Lithuania), two entries in Latin | 14 |
