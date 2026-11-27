@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: "fyndling-mcp - MCP server for medieval events, places and historical recipes"
+message: "If you use this software or its data, please cite it as below."
+type: software
+authors:
+  - given-names: "Ralf René"
+    family-names: "Vitasek"
+    orcid: "https://orcid.org/0009-0007-4677-5679"
+    affiliation: "Fyndling.de"
+abstract: >-
+  Model Context Protocol (MCP) server for Fyndling.de. It gives AI clients
+  access to medieval markets and living-history events in Europe and North
+  America, permanent places (meaderies, castles, medieval restaurants) and a
+  corpus of historical recipes (c. 1300-1695) with transcriptions, modern
+  adaptations and structured ingredient lists. Endpoint:
+  https://fyndling.de/mcp (Streamable HTTP, no authentication).
+url: "https://fyndling.de"
+repository-code: "https://github.com/neongrau/fyndling-mcp"
+keywords:
+  - "Model Context Protocol"
+  - "MCP"
+  - "medieval markets"
+  - "living history"
+  - "historical recipes"
+  - "culinary history"
+license: CC0-1.0
