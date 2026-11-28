@@ -6,7 +6,7 @@ Built for **medieval market fans, reenactors, and living-history enthusiasts** �
 
 - **Medieval events** — query 8,900+ markets, concerts, castle experiences, living-history events, and renaissance faires across 27 countries in Europe and North America, by **location + radius + date range** (updated weekly)
 - **Permanent POIs** — 1,900+ meaderies, mead producers, castles, and medieval restaurants, also searchable by geo-radius
-- **Historical recipes** — 9,800+ recipes from **sixty-four sources** (cookbooks, cellar books, bee-keeping treatises and a herbal) spanning c. 1300–1695, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
+- **Historical recipes** — 9,900+ recipes from **sixty-four sources** (cookbooks, cellar books, bee-keeping treatises and a herbal) spanning c. 1300–1695, with modern German adaptations, structured ingredient lists, original manuscript transcripts, and a controlled tag vocabulary for dish-type, diet, and social-class filtering
 
 → **[fyndling.de](https://fyndling.de)** — the web app behind this data
 
@@ -158,7 +158,7 @@ No parameters.
 | `muenchner_cgm467` | Hausbuch aus Dietramszell (Cgm 467) | ~1477 | Early New High German (Bavarian) | 3 |
 | `mondseer_kochbuch` | Mondseer Kochbuch (Graz, UB Ms. 1609) | ~1480 | Early New High German (Bavarian–Austrian) | 268 |
 | `muenchner_cgm725` | Münchner Handschrift Cgm 725 | late 15th c. | Early New High German (Bavarian) | 22 |
-| `corema_so1` | Solothurner Küchenmeisterei (Zentralbibliothek Solothurn, Cod. S 490) | ~1487 | Early New High German (Alemannic) | 121 |
+| `corema_so1` | Solothurner Küchenmeisterei (Zentralbibliothek Solothurn, Cod. S 490) | ~1487 | Early New High German (Alemannic) | 152 |
 | `corema_n1` | Alemannisches Büchlein von guter Speise | 1492–1494 | Early New High German (Swabian) | 26 |
 | `weinbuch-donaueschingen` | Weinbuch im Codex Donaueschingen | ~1500 | Early New High German (South Rhine-Franconian) | 28 |
 | `muenchner_cgm349` | Münchner Handschrift Cgm 349 | 16th c. (addendum) | Early New High German (Bavarian) | 4 |
@@ -178,9 +178,9 @@ No parameters.
 | `rumpolt` | Ein new Kochbuch (Marx Rumpolt) | 1581 | Early New High German (Frankfurt/Mainz) | 2028 |
 | `clutius` | Van de Byen, Book 3: Vanden Honich (Theodorus Clutius) | 1597 | Early Modern Dutch (Leiden) | 44 |
 | `wecker` | Ein köstlich new Kochbuch (Anna Wecker) | 1598 | Early New High German (Upper German, Amberg/Upper Palatinate) | 483 |
-| `rontzier` | Kunstbuch von mancherley Essen (Frantz de Rontzier) | 1598 | Early New High German (Brunswick printing language, Wolfenbüttel) | 1528 |
+| `rontzier` | Kunstbuch von mancherley Essen (Frantz de Rontzier) | 1598 | Early New High German (Brunswick printing language, Wolfenbüttel) | 1640 |
 | `folger_longe` | Receipt book of Sarah Longe (Folger MS V.a.425) | 17th c. | Early Modern English (household manuscript, later hands to the 18th c.) | 141 |
-| `syreniusz` | Zielnik herbarzem (Szymon Syreński / Syreniusz), barley mead | 1613 | Middle Polish (Kraków) | 1 |
+| `syreniusz` | Zielnik herbarzem (Szymon Syreński / Syreniusz), barley, rye and starch chapters | 1613 | Middle Polish (Kraków) | 31 |
 | `mleczko` | Household convolute of Mikołaj Mleczko (Chołopienicze): mead, brandy and beer | ~1630 | Middle Polish (Grand Duchy of Lithuania), two entries in Latin | 14 |
 | `butler` | The Feminine Monarchie, ch. 10 (Charles Butler) | 1623 | Early Modern English (London) | 18 |
 | `royer` | Garden produce in the kitchen (Johann Royer, Hessem garden) | 1648 | Early New High German (Halberstadt) | 20 |
